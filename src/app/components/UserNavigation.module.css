@@ -1,0 +1,79 @@
+.navbar {
+  position: absolute;
+  /*
+  top: 0;
+  left: 0; */
+  width: 100%;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 80px;
+  /* background: rgba(0, 0, 0, 0.35);  */
+  backdrop-filter: blur(10px);      /* glass-like blur */
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 20px;
+}
+
+/* Logo */
+.navbar__logo img {
+  height: 60px;
+  object-fit: contain;
+}
+
+/* Links in center */
+.navbar__links {
+  display: flex;
+  gap: 35px;
+}
+
+.navbar__links a {
+  color: #ffffffcc;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.navbar__links a:hover {
+  color: #ffcc33;
+}
+
+/* Right-side contact info */
+.navbar__contact {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  font-size: 13px;
+}
+
+.navbar__contact span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #ffffffcc;
+}
+
+.navbar__contact svg {
+  color: #ffcc33;
+  font-size: 15px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .navbar {
+    flex-direction: column;
+    padding: 10px 40px;
+  }
+
+  .navbar__links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .navbar__contact {
+    margin-top: 10px;
+  }
+}

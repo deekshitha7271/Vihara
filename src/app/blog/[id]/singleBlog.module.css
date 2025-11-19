@@ -1,0 +1,56 @@
+.singleBlogPage {
+  color: #fff;
+  min-height: 100vh;
+  background: #000;
+}
+
+.hero {
+  position: relative;
+  height: 90vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.1));
+}
+
+.heroContent {
+  position: relative;
+  text-align: center;
+  z-index: 2;
+  padding-bottom: 4rem;
+}
+
+.heroContent h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #f5b301, #ff6600);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.heroContent p {
+  font-size: 1.2rem;
+  color: #f0e4c8;
+}
+
+.contentSection {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: rgba(255,255,255,0.05);
+  border-radius: 15px;
+  backdrop-filter: blur(8px);
+}
+
+.blogText {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  white-space: pre-line;
+}

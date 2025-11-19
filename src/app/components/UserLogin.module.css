@@ -1,0 +1,60 @@
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: hsl(52, 7%, 58%);
+    }
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    max-width: max-content;
+    width:500px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    }
+.inputHeads {
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+.inputField {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 450px;
+    margin-bottom: 20px;
+    }
+.buttonElement {
+    padding: 10px 20px;
+    background-color: #afa787;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    }
+.buttonElement:hover {
+    background-color: #646251;
+    }
+
+.loginHead{
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+.registerLink {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #646251;
+    text-decoration: none;
+}
