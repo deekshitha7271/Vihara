@@ -1,71 +1,167 @@
+/* NAVBAR BASE */
 .navbar {
-  position: absolute;
-  /*
+  position: fixed;
   top: 0;
-  left: 0; */
+  left: 0;
   width: 100%;
-  z-index: 20;
+  z-index: 50;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 80px;
-  /* background: rgba(0, 0, 0, 0.35);  */
-  backdrop-filter: blur(10px);      /* glass-like blur */
-  color: #fff;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 20px;
+
+  padding: 18px 70px;
+
+  background: transparent;
+  backdrop-filter: blur(12px);
+
+  transition: background 0.3s ease;
 }
 
-/* Logo */
-.navbar__logo img {
-  height: 60px;
-  object-fit: contain;
+/* ON HOVER → FULL WHITE */
+.navbar:hover {
+  background: #ffffff;
 }
 
-/* Links in center */
+/* LEFT LINKS */
 .navbar__links {
   display: flex;
-  gap: 35px;
+  align-items: center;
+  gap: 40px; /* proper spacing */
 }
 
+/* SMOOTH BLACK UNDERLINE ANIMATION */
 .navbar__links a {
-  color: #ffffffcc;
+  position: relative;
+  color: #ffffffd9;
   font-size: 14px;
   letter-spacing: 0.5px;
-  text-decoration: none;
   font-weight: 500;
-  transition: color 0.2s ease;
+  text-decoration: none;
+  padding-bottom: 6px;
+  transition: color 0.3s ease;
 }
 
-.navbar__links a:hover {
-  color: #ffcc33;
+/* On navbar hover → dark text */
+.navbar:hover .navbar__links a {
+  color: #111;
 }
 
-/* Right-side contact info */
+/* Underline element */
+.navbar__links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0%;
+  background: #000;
+  transition: width 0.3s ease;
+}
+
+/* ON HOVER → underline expands */
+.navbar__links a:hover::after {
+  width: 100%;
+}
+
+/* ---- CONTACT (center area) ---- */
 .navbar__contact {
   display: flex;
-  align-items: center;
-  gap: 25px;
-  font-size: 13px;
+  align-items: center;       /* vertically center all items in the bar */
+  gap: 20px;                 /* spacing between phone block and email block */
+  font-size: 14px;
+  line-height: 1;
 }
 
-.navbar__contact span {
+/* each contact entry is a small flex row: icon + text */
+.navbar__contact .contact-item {
   display: flex;
-  align-items: center;
-  gap: 6px;
-  color: #ffffffcc;
+  align-items: center;       /* center icon and text vertically */
+  gap: 8px;                  /* space between icon and the number/email text */
+  color: #ffffffd9;          /* default light color on dark bg */
+  white-space: nowrap;       /* prevent wrapping */
 }
 
+/* icon sizing and visual alignment */
+.navbar__contact .contact-item svg {
+  width: 18px;               /* fixed icon width */
+  height: 18px;              /* fixed icon height */
+  flex-shrink: 0;            /* never shrink the icon */
+  display: inline-block;
+  vertical-align: middle;
+  color: #ffcc33;            /* icon color */
+}
+
+/* text style next to icon */
+.navbar__contact .contact-text {
+  font-size: 14px;
+  line-height: 1;
+  color: inherit;
+  transform: translateY(0px); /* safe for fine-tuning vertical alignment if needed */
+}
+
+/* when the navbar is hovered, ensure contact items switch color */
+.navbar:hover .navbar__contact .contact-item,
+.navbar:hover .navbar__contact .contact-text {
+  color: #111;
+}
+
+/* responsive tweaks - stack on very small screens */
+@media (max-width: 480px) {
+  .navbar__contact { gap: 12px; font-size: 13px; }
+  .navbar__contact .contact-item { gap: 6px; }
+  .navbar__contact .contact-item svg { width: 16px; height: 16px; }
+}
+
+
+/* When navbar hovered → dark text */
+.navbar:hover .navbar__contact span {
+  color: #111;
+}
+
+/* Icon styling */
 .navbar__contact svg {
   color: #ffcc33;
-  font-size: 15px;
+  font-size: 16px;
 }
 
-/* Responsive */
+.navbar:hover .navbar__contact svg {
+  color: #ff6600; /* optional */
+}
+
+/* LOGOUT (right side) */
+.navbar__logout a {
+  color: #ffffffd9;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.navbar:hover .navbar__logout a {
+  color: #111;
+}
+
+.hostButton {
+  padding: 8px 16px;
+  background-color: transparent;
+  color: #ffffffd9;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.hostButton:hover {
+  
+  color: #111;
+} 
+/* RESPONSIVE */
 @media (max-width: 1024px) {
   .navbar {
     flex-direction: column;
-    padding: 10px 40px;
+    gap: 10px;
+    padding: 15px 40px;
   }
 
   .navbar__links {
@@ -73,7 +169,5 @@
     justify-content: center;
   }
 
-  .navbar__contact {
-    margin-top: 10px;
-  }
+ 
 }

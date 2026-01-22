@@ -1,0 +1,27 @@
+.becomeHostButton{
+    color: rgb(38, 35, 35);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: transparent;
+    
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+}
+
+.becomeHostButton:hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0%;
+  background: #000;
+  transition: width 0.3s ease;
+}
+
+/* ON HOVER → underline expands */
+.becomeHostButton:hover::after {
+  width: 100%;
+}

@@ -16,13 +16,29 @@ const userSchema = new mongoose.Schema({
     },
     role:{
         type:String,
+        enum: ['user', 'host', 'admin'],
         default:'user'
+    },
+
+    hostProfile:{
+        completed:{
+            type:Boolean,
+            default:false
+        },
+        joinedAt:{
+            type:Date
+        },
+        allowedLocations: {
+            type: [mongoose.Schema.Types.ObjectId],
+            ref: "location"
+        }
     },
     bookings:[{
         type:mongoose.Types.ObjectId,
         ref:'bookings'
     }]
-});
+}, {timestamps:true}
+    );
 
 const UserModel = mongoose.models.user||mongoose.model('user',userSchema);
 export default UserModel;

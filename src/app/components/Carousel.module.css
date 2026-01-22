@@ -1,0 +1,64 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 98vh;           /* 🔥 FULL VIEWPORT HERO */
+  max-height: 900px;      /* optional safety cap */
+  /* border-radius: 20px; */
+  overflow: hidden;
+  
+}
+
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* fills hero perfectly */
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  padding: 0 20px;
+}
+
+.title {
+  font-size: clamp(2rem, 4vw, 4rem);  /* responsive font */
+  font-weight: 600;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
+  margin-top: 8px;
+  margin-bottom: 20px;
+  opacity: 0.95;
+}
+
+.button {
+  padding: 14px 28px;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.5);
+  border-radius: 12px;
+  color: #fff;
+  cursor: pointer;
+  font-size: clamp(0.9rem, 1vw, 1.1rem);
+  transition: 0.3s;
+}
+
+.button:hover {
+  background: rgba(255,255,255,0.25);
+  transform: translateY(-3px);
+}

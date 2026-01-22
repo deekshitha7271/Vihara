@@ -1,0 +1,163 @@
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+}
+
+.leftPanel {
+    flex: 1;
+    background: linear-gradient(135deg, rgb(2, 78, 66) 0%, rgb(32, 30, 30) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem;
+    color: white;
+    position: relative;
+}
+
+.logo {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.leftContent h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+}
+
+.rightPanel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 3rem 5rem;
+    background: white;
+    overflow-y: auto;
+}
+
+.stepContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.stepTitle {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: #222;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.backBtn {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+    color: #222;
+}
+
+/* Vihara Blue Button */
+.nextBtn {
+    background: rgb(68, 68, 163);
+    color: white;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.nextBtn:active {
+    transform: scale(0.98);
+}
+
+.nextBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Form Elements */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.card:hover {
+    border-color: rgb(3, 107, 90);
+}
+
+.card.selected {
+    border-color: rgb(3, 107, 90);
+    background: #f0fdfa;
+    /* Very light teal tint */
+    box-shadow: 0 0 0 1px rgb(3, 107, 90);
+}
+
+.input {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid #b0b0b0;
+    border-radius: 12px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    margin-bottom: 1rem;
+}
+
+.input:focus {
+    border-color: rgb(3, 107, 90);
+    box-shadow: 0 0 0 1px rgb(3, 107, 90);
+}
+
+.textarea {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid #b0b0b0;
+    border-radius: 12px;
+    font-size: 1rem;
+    min-height: 150px;
+    outline: none;
+    resize: vertical;
+}
+
+.textarea:focus {
+    border-color: rgb(3, 107, 90);
+    box-shadow: 0 0 0 1px rgb(3, 107, 90);
+}

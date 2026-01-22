@@ -1,3 +1,4 @@
+/* Fullscreen background with resort image and overlay */
 .formContainer {
     display: flex;
     flex-direction: column;
@@ -5,56 +6,102 @@
     justify-content: center;
     height: 100vh;
     width: 100vw;
-    background-color: hsl(52, 7%, 58%);
-    }
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+        url('/resort-2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Glassmorphism Card Effect */
 .form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    max-width: max-content;
-    width:500px;
-    background-color: #f9f9f9;
-    padding: 20px;
-    }
-.inputHeads {
-    margin: 10px 0;
-    font-size: 18px;
-    font-weight: bold;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 24px;
+    width: 90%;
+    max-width: 420px;
+    background: rgba(255, 255, 255, 0.85);
+    /* Frosty transparency */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 40px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+.registerHead {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    color: #1a1a1a;
+    text-align: center;
+    letter-spacing: -0.5px;
+}
+
+.label {
+    align-self: flex-start;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
 .inputField {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 450px;
+    padding: 14px 16px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    width: 100%;
     margin-bottom: 20px;
-    }
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.inputField:focus {
+    outline: none;
+    border-color: rgb(3, 107, 90);
+    box-shadow: 0 0 0 4px rgba(3, 107, 90, 0.15);
+    background-color: #fff;
+}
+
 .buttonElement {
-    padding: 10px 20px;
-    background-color: #afa787;
+    padding: 16px;
+    background-color: rgb(3, 107, 90);
+    /* Primary Vihara Teal */
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 12px;
     cursor: pointer;
-    }
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: all 0.2s;
+    margin-top: 10px;
+    box-shadow: 0 4px 12px rgba(3, 107, 90, 0.3);
+}
+
 .buttonElement:hover {
-    background-color: #646251;
-    }
-
-.registerHead{
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
+    background-color: rgb(2, 86, 72);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(3, 107, 90, 0.4);
 }
 
 .loginLink {
-    margin-top: 15px;
-    font-size: 14px;
-    color: #646251;
+    margin-top: 24px;
+    font-size: 0.9rem;
+    color: #666;
     text-decoration: none;
-    }
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.loginLink:hover {
+    color: rgb(3, 107, 90);
+    text-decoration: underline;
+}

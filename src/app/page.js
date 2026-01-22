@@ -4,34 +4,38 @@ import DBConnection from "./utils/config/db";
 import UserNavigation from "./components/UserNavigation";
 import AdminPage from "./admin/page";
 import Carousel from "./components/carouselElement";
-import ProductCollection from "./components/ProductCollection";
+// import ProductCollection from "./components/ProductCollection";
+import LocationCollection from "./components/LocationCollection";
+import Image from "next/image";
+import RandomHeroVideo from "./components/carouselElement";
+import Carousel2 from "./components/Carousel2";
 
+
+ 
 const HomePage = async () => {
-
   const session = await auth();
-  if(!session){
+
+  if (!session) {
     redirect('/login');
   }
-  const userName=session.username;
-  
-  console.log("role check:",session.role )
-  console.log('user check:',userName);
-  
-  await DBConnection();
-  return ( <div>
-    {session.role==='user' &&( <>
-    <UserNavigation userName={userName}/>
-    <Carousel/>
-    <ProductCollection/>
 
-    </>)}
-    {session.role==='admin' && (
-      
-      <AdminPage/>
-    )
-    }
-    
-  </div> );
-}
- 
+  const role = session.user.role;
+
+  return (
+    <div>
+      {/* USER + HOST SEE SAME HOME */}
+      {(role === "user" || role === "host") && (
+        <>
+          <UserNavigation />
+          <RandomHeroVideo />
+          <LocationCollection />
+        </>
+      )}
+
+      {/* ADMIN ONLY */}
+      {role === "admin" && <AdminPage />}
+    </div>
+  );
+};
+
 export default HomePage;
