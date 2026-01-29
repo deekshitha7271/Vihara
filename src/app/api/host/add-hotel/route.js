@@ -67,18 +67,19 @@ export async function POST(request) {
   }
 
   // 5️⃣ CHECK IF HOST IS ALLOWED FOR THIS LOCATION
-  const allowedLocationIds = user.hostProfile.allowedLocations
-    .map(id => id.toString());
+  // Restriction removed to allow hosts to add hotels in any location
+  // const allowedLocationIds = user.hostProfile.allowedLocations
+  //   .map(id => id.toString());
 
-  if (!allowedLocationIds.includes(locationDoc._id.toString())) {
-    return NextResponse.json(
-      {
-        success: false,
-        message: "You are not allowed to add hotels in this location"
-      },
-      { status: 403 }
-    );
-  }
+  // if (!allowedLocationIds.includes(locationDoc._id.toString())) {
+  //   return NextResponse.json(
+  //     {
+  //       success: false,
+  //       message: "You are not allowed to add hotels in this location"
+  //     },
+  //     { status: 403 }
+  //   );
+  // }
 
   // 6️⃣ Save image
   const buffer = Buffer.from(await image.arrayBuffer());
@@ -102,7 +103,9 @@ export async function POST(request) {
       image: `/uploads/${image.name}`,
       ownerId,
       status: "PENDING",
-      isFeatured: false
+      isFeatured: false,
+      lat: data.get("lat"), // Save latitude
+      lng: data.get("lng")  // Save longitude
     });
 
     await newHotel.save();

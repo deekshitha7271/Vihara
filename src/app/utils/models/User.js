@@ -3,7 +3,7 @@ const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
-        
+
     },
     email: {
         type: String,
@@ -14,31 +14,31 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    role:{
-        type:String,
+    role: {
+        type: String,
         enum: ['user', 'host', 'admin'],
-        default:'user'
+        default: 'user'
     },
 
-    hostProfile:{
-        completed:{
-            type:Boolean,
-            default:false
+    hostProfile: {
+        completed: {
+            type: Boolean,
+            default: false
         },
-        joinedAt:{
-            type:Date
+        joinedAt: {
+            type: Date
         },
         allowedLocations: {
             type: [mongoose.Schema.Types.ObjectId],
             ref: "location"
         }
     },
-    bookings:[{
-        type:mongoose.Types.ObjectId,
-        ref:'bookings'
+    bookings: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'booking'
     }]
-}, {timestamps:true}
-    );
+}, { timestamps: true }
+);
 
-const UserModel = mongoose.models.user||mongoose.model('user',userSchema);
+const UserModel = mongoose.models.user || mongoose.model('user', userSchema);
 export default UserModel;

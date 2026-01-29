@@ -2,20 +2,20 @@ const { default: mongoose } = require("mongoose");
 const { type } = require("os");
 
 const locationSchema = new mongoose.Schema({
-    image:{
-        type:String,
+    image: {
+        type: String,
     },
-    location:{
-        type:String,
-        required:true
+    location: {
+        type: String,
+        required: true
     },
-    description:{
-        type:String,
-        required:true
+    description: {
+        type: String,
+        required: true
     },
-    category:{
-        type:String,
-        required:true
+    category: {
+        type: String,
+        required: true
     }
 })
 

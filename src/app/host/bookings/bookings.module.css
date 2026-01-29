@@ -1,0 +1,180 @@
+/* Layout */
+.container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    font-family: 'Inter', sans-serif;
+}
+
+.main {
+    flex: 1;
+    margin-left: 280px;
+    padding: 3rem;
+}
+
+.header {
+    margin-bottom: 2rem;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: #666;
+}
+
+/* Empty State */
+.emptyState {
+    text-align: center;
+    padding: 5rem;
+    background: white;
+    border-radius: 20px;
+    border: 1px dashed #ccc;
+    color: #666;
+}
+
+.emptyIcon {
+    margin-bottom: 1rem;
+    color: #ccc;
+}
+
+/* Bookings Table/List */
+.bookingCard {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    transition: transform 0.2s;
+}
+
+.bookingCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.bookingInfo {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 24px;
+    align-items: center;
+}
+
+.guestInfo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.guestAvatar {
+    width: 48px;
+    height: 48px;
+    background-color: #e0f2f1;
+    color: rgb(3, 107, 90);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.guestDetails h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+}
+
+.guestDetails p {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.stayDetails h4 {
+    font-size: 0.85rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.stayDetails p {
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.status {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-align: center;
+    width: fit-content;
+}
+
+.pending {
+    background: #fff3e0;
+    color: #ef6c00;
+}
+
+.confirmed {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.cancelled {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.completed {
+    background: #f5f5f5;
+    color: #616161;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    border-left: 1px solid #f0f0f0;
+    padding-left: 24px;
+    margin-left: 24px;
+}
+
+.btn {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.acceptBtn {
+    background-color: rgb(3, 107, 90);
+    color: white;
+}
+
+.acceptBtn:hover {
+    background-color: rgb(2, 86, 72);
+}
+
+.rejectBtn {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+.rejectBtn:hover {
+    background-color: #ffcdd2;
+}

@@ -15,14 +15,14 @@
 
 
 //     }
-     
+
 //     useEffect(()=>{
 //         collectionHandler()
-        
+
 //     },[])
-   
+
 //  return (
-    
+
 //     <div>
 //       <h1>Your Stay Your Story</h1>
 //       {collections ? collections.map((item) => {
@@ -55,10 +55,10 @@ export default function LocationCollection() {
   useEffect(() => {
     async function fetchCollections() {
       try {
-        const res = await fetch("http://localhost:3000/api/admin/add-location");
+        const res = await fetch("http://localhost:3001/api/admin/add-location");
         const json = await res.json();
         setCollections(json.data || []);
-        console.log("fetched",collections)
+        console.log("fetched", collections)
       } catch (e) {
         console.error("fetch error:", e);
         setCollections([]);
@@ -70,26 +70,26 @@ export default function LocationCollection() {
   }, []);
 
   const tabs = [
-  { label: "Wellness", value: "Wellness" },
-  { label: "Family", value: "Family" },
-  { label: "All-Inclusive", value: "All-Inclusive" },
-  { label: "Short Gateways", value: "Short Gateways" },
-  { label: "All", value: "All" },
+    { label: "Wellness", value: "Wellness" },
+    { label: "Family", value: "Family" },
+    { label: "All-Inclusive", value: "All-Inclusive" },
+    { label: "Short Gateways", value: "Short Gateways" },
+    { label: "All", value: "All" },
 
   ];
 
   const filteredCollections = collections.filter((item) => {
-  if (!item) return false;
-  if (activeTab === "All") return true;
-  const cat = (item.category || "").toString().trim().toLowerCase();
-  return cat === activeTab.toString().trim().toLowerCase();
+    if (!item) return false;
+    if (activeTab === "All") return true;
+    const cat = (item.category || "").toString().trim().toLowerCase();
+    return cat === activeTab.toString().trim().toLowerCase();
   });
-//   const filteredCollections = collections.filter((item) => {
-//   if (!item) return false;
-//   if (activeTab === "All") return true;
-//   const cat = (item.category || "").toString().trim().toLowerCase();
-//   return cat === activeTab.toString().trim().toLowerCase();
-// });
+  //   const filteredCollections = collections.filter((item) => {
+  //   if (!item) return false;
+  //   if (activeTab === "All") return true;
+  //   const cat = (item.category || "").toString().trim().toLowerCase();
+  //   return cat === activeTab.toString().trim().toLowerCase();
+  // });
 
 
 
@@ -127,12 +127,12 @@ export default function LocationCollection() {
                   <div className={styles.mediaWrap}>
                     {/* Use unoptimized for external images or configure next.config.js */}
                     <Image
-                        src={item.image}
-                        alt={item.location}
-                        fill
-                        quality={90}
-                        style={{ objectFit: "cover", objectPosition: "center" }}
-                      />
+                      src={item.image}
+                      alt={item.location}
+                      fill
+                      quality={90}
+                      style={{ objectFit: "cover", objectPosition: "center" }}
+                    />
 
 
                     <div className={styles.cardOverlay} />

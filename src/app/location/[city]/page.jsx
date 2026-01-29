@@ -1,41 +1,36 @@
 import DBConnection from "@/app/utils/config/db";
 import HotelModel from '@/app/utils/models/hotel';
-import Link from "next/link";
+import LocationClient from "./LocationClient";
 
-const LocationPage = async ({params}) => {
-    
-    const {city} = await params;
-    const decodeCity = decodeURIComponent(params.city);
+const LocationPage = async ({ params }) => {
+
+    const { city } = await params;
+    const decodeCity = decodeURIComponent(city);
     console.log("PARAMS 👉", params);
     await DBConnection();
 
     //to get only approved hotels for the city
-
     const hotels = await HotelModel.find({
         location: city,
         status: "APPROVED"
     });
 
+    // Serialize to plain objects to pass to client component
+    const serializedHotels = hotels.map(hotel => ({
+        _id: hotel._id.toString(),
+        name: hotel.name,
+        image: hotel.image,
+        description: hotel.description,
+        price: hotel.price,
+        location: hotel.location,
+        category: hotel.category,
+        lat: hotel.lat,
+        lng: hotel.lng
+    }));
+
     return (
-        <div>
-            <h1>Hotels in {city}</h1>
-
-            {hotels.length === 0 && <p>No hotels found in {city}</p>}
-
-            {hotels.map((hotel)=>(
-                <Link key={hotel._id} href={`/detail/${hotel._id}`}>
-                    <div>
-                        <img src={hotel.image} width="300"/>
-                        <h2>{hotel.name}</h2>
-                        <p>{hotel.description}</p>
-                        <p>Price: Rs.{hotel.price}</p>
-                    </div>   
-                </Link>
-            ))}
-        </div>
+        <LocationClient city={decodeCity} hotels={serializedHotels} />
     )
-
-
 }
 
 export default LocationPage;

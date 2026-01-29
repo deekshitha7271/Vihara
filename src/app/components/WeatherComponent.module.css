@@ -1,0 +1,162 @@
+.weatherWidget {
+    background: linear-gradient(180deg, #1e3a8a 0%, #2563eb 100%);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 10px 40px rgba(30, 58, 138, 0.4);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    margin-top: 24px;
+}
+
+/* Shine effect */
+.weatherWidget::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.location {
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.mainTemp {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.bigTemp {
+    font-size: 4rem;
+    font-weight: 500;
+    line-height: 1;
+}
+
+.condition {
+    font-size: 1rem;
+    opacity: 0.9;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.forecastGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 16px 12px;
+    backdrop-filter: blur(8px);
+}
+
+.forecastItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.time {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+.icon {
+    font-size: 1.2rem;
+}
+
+.tempSmall {
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+/* Modal Styles */
+.modalBackdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modalContent {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    width: 100%;
+    max-width: 500px;
+    border-radius: 32px;
+    padding: 32px;
+    color: white;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.closeButton {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: background 0.2s;
+}
+
+.closeButton:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.dailyRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dailyRow:last-child {
+    border-bottom: none;
+}
+
+.dayName {
+    font-weight: 600;
+    width: 100px;
+}
+
+.dailyTemp {
+    font-weight: 700;
+}

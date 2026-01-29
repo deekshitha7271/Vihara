@@ -5,6 +5,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import styles from "./onboarding.module.css";
 // Ensure lucide-react is installed or use alternatives
 import { Home, Building2, Palmtree, MapPin, CheckCircle } from "lucide-react";
+import dynamic from 'next/dynamic';
+
+// Dynamic import for Map to avoid SSR issues with Leaflet
+const MapPicker = dynamic(() => import('@/app/components/MapPicker'), {
+  ssr: false,
+  loading: () => <div style={{ height: '300px', background: '#f0f0f0', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading Map...</div>
+});
 
 export default function HostOnboarding() {
   const [step, setStep] = useState(0); // 0 = detailed intro
@@ -153,10 +160,9 @@ export default function HostOnboarding() {
                     value={data.city}
                     onChange={(e) => handleChange('city', e.target.value)}
                   />
-                  {/* Map Placeholder */}
-                  <div style={{ height: '300px', background: '#f0f0f0', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#999' }}>
-                    <MapPin size={48} />
-                    <span style={{ marginLeft: '10px' }}>Map Preview</span>
+                  {/* Live Map Integration */}
+                  <div style={{ marginTop: '20px' }}>
+                    <MapPicker city={data.city} />
                   </div>
                 </div>
               )}

@@ -32,7 +32,7 @@
 //   }, [emblaApi, onSelect])
 
 //   return (
-    
+
 //     <div className="carousel" ref={emblaRef}>
 //   <div className="carousel__container">
 //     {slides.map((slide, i) => (
@@ -223,7 +223,7 @@ export default function RandomHeroVideo() {
   const VIDEOS = [
     "/entry.mp4",
     "/entry2.mp4",
-    "/entry3.mp4",
+
     "/entry5.mp4",
   ];
 

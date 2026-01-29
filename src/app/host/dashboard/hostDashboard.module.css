@@ -1,0 +1,236 @@
+/* Main Layout */
+.container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    font-family: 'Inter', sans-serif;
+    color: #1a1a1a;
+}
+
+/* Sidebar Placeholder - actual styling in HostSidebar.module.css */
+.sidebar {
+    width: 280px;
+    background-color: #1a1a1a;
+    border-right: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+/* Main Content */
+.main {
+    flex: 1;
+    padding: 3rem;
+    overflow-y: auto;
+    margin-left: 280px;
+    /* Offset for fixed sidebar */
+}
+
+/* Typography */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.welcomeText h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #1a1a1a;
+}
+
+.welcomeText p {
+    color: #666;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+/* Buttons */
+.addBtn {
+    background-color: #000;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border: none;
+}
+
+.addBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    background-color: #333;
+}
+
+/* Stats Grid */
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 3rem;
+}
+
+.statCard {
+    background: white;
+    padding: 24px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eee;
+    transition: transform 0.2s;
+}
+
+.statCard:hover {
+    transform: translateY(-4px);
+    border-color: #000;
+}
+
+.statHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.statIcon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    background-color: #1a1a1a;
+    color: white;
+    border: none;
+}
+
+.statValue {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+    font-family: 'Inter', sans-serif;
+}
+
+.statLabel {
+    color: #666;
+    font-size: 0.9rem;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+/* Section */
+.sectionTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #1a1a1a;
+    letter-spacing: normal;
+    font-family: 'Inter', sans-serif;
+}
+
+.actionGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.actionCard {
+    background: white;
+    padding: 24px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid #f0f0f0;
+    transition: all 0.2s;
+}
+
+.actionCard:hover {
+    border-color: #000;
+    background-color: #fafafa;
+}
+
+.actionIcon {
+    width: 60px;
+    height: 60px;
+    background-color: #f5f5f5;
+    color: #000;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+.actionCard:hover .actionIcon {
+    background-color: #f5f5f5;
+}
+
+.actionCard h3 {
+    color: #1a1a1a;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.actionCard p {
+    color: #666;
+    margin-top: 0;
+}
+
+/* Pending State */
+.pendingContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100vw;
+    background: #fcfcfc;
+    padding: 20px;
+}
+
+.pendingCard {
+    background: white;
+    padding: 4rem;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    border: 1px solid #eaeaea;
+}
+
+.pendingIcon {
+    width: 80px;
+    height: 80px;
+    background-color: #1a1a1a;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    border: none;
+}
+
+.pendingCard h1 {
+    color: #1a1a1a;
+    font-family: 'Inter', sans-serif;
+}
+
+.pendingCard p {
+    color: #666;
+}

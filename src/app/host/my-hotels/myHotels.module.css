@@ -1,0 +1,153 @@
+/* Layout matching dashboard */
+.container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    font-family: 'Inter', sans-serif;
+    color: #1a1a1a;
+}
+
+.main {
+    flex: 1;
+    margin-left: 280px;
+    /* Offset for fixed sidebar */
+    padding: 3rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.title h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.subtitle {
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+.addBtn {
+    background-color: #000;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s;
+}
+
+.addBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    background-color: #333;
+}
+
+/* Hotel Grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eee;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border-color: #000;
+}
+
+.imageContainer {
+    height: 200px;
+    width: 100%;
+    position: relative;
+    background-color: #eee;
+}
+
+.hotelImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.content {
+    padding: 20px;
+}
+
+.hotelName {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #1a1a1a;
+}
+
+.location {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.price {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #1a1a1a;
+}
+
+.status {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.pending {
+    background-color: #fff3e0;
+    color: #ff9800;
+}
+
+.approved {
+    background-color: #e8f5e9;
+    color: #4caf50;
+}
+
+.rejected {
+    background-color: #ffebee;
+    color: #f44336;
+}
+
+.emptyState {
+    text-align: center;
+    padding: 4rem;
+    color: #666;
+    background: white;
+    border-radius: 24px;
+    border: 1px dashed #ccc;
+}

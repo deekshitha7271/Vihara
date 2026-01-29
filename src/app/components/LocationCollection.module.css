@@ -1,7 +1,9 @@
 /* -------- Variables -------- */
 :root {
-  --card-width: 380px;      /* card width (narrower) */
-  --card-height: 360px;     /* card height (taller) */
+  --card-width: 350px;
+  /* card width (narrower) */
+  --card-height: 350px;
+  /* card height (taller) */
   --card-radius: 16px;
   --gap: 32px;
   --dark-bg: #121212;
@@ -46,7 +48,7 @@
 .tab {
   background: transparent;
   border: none;
-  color: rgba(255,255,255,0.8);
+  color: rgba(255, 255, 255, 0.8);
   font-size: 15px;
   cursor: pointer;
   padding: 4px 0;
@@ -62,7 +64,7 @@
 .underline {
   width: 100%;
   height: 1px;
-  background: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.15);
   margin-bottom: 26px;
 }
 
@@ -88,13 +90,13 @@
   border-radius: var(--card-radius);
   overflow: hidden;
   background: #1a1a1a;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
   transition: transform .2s ease, box-shadow .2s ease;
 }
 
 .card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 26px 60px rgba(0,0,0,0.75);
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.75);
 }
 
 /* -------- Image Wrapper -------- */
@@ -116,10 +118,9 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(0deg,
-    rgba(0,0,0,0.6) 10%,
-    rgba(0,0,0,0.25) 40%,
-    transparent 100%
-  );
+      rgba(0, 0, 0, 0.6) 10%,
+      rgba(0, 0, 0, 0.25) 40%,
+      transparent 100%);
   z-index: 2;
 }
 
@@ -135,16 +136,16 @@
   margin: 0;
   font-size: 26px;
   font-weight: 700;
-  text-shadow: 0 4px 14px rgba(0,0,0,0.7);
+  text-shadow: 0 4px 14px rgba(0, 0, 0, 0.7);
 }
 
 .description {
   margin-top: 4px;
   font-size: 13px;
   line-height: 1.4;
-  color: rgba(255,255,255,0.92);
+  color: rgba(255, 255, 255, 0.92);
   max-width: 85%;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
@@ -156,7 +157,7 @@
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.12);
+  background: rgba(255, 255, 255, 0.12);
   color: #fff;
   display: flex;
   justify-content: center;
@@ -168,7 +169,7 @@
 }
 
 .cardArrow:hover {
-  background: rgba(255,255,255,0.25);
+  background: rgba(255, 255, 255, 0.25);
   transform: translateY(-3px);
 }
 

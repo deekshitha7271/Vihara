@@ -1,5 +1,6 @@
 import DBConnection from "@/app/utils/config/db";
 import UserModel from "@/app/utils/models/User";
+import LocationModel from "@/app/utils/models/location";
 import { auth } from "@/app/auth";
 import { NextResponse } from "next/server";
 
@@ -14,11 +15,10 @@ export async function GET() {
     );
   }
 
-  const user = await UserModel.findById(session.user.id)
-    .populate("hostProfile.allowedLocations");
+  const locations = await LocationModel.find({});
 
   return NextResponse.json({
     success: true,
-    locations: user.hostProfile.allowedLocations || []
+    locations: locations
   });
 }

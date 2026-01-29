@@ -1,0 +1,262 @@
+/* Main Container */
+.container {
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    color: #111;
+    background-color: #fcfcfc;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 75vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: 1;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 2;
+}
+
+.heroContent {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+.superTitle {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.title {
+    font-size: 4rem;
+    font-family: "Georgia", serif;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.1;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Content Width & Split Layout */
+.contentInner {
+    max-width: 1400px;
+    /* Wider for split view */
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+    position: relative;
+    z-index: 4;
+}
+
+/* High Density Split Layout */
+.splitLayout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    /* List gets more space, Map is compact 340px */
+    gap: 32px;
+    align-items: start;
+}
+
+/* Hotel List - Denser Grid */
+.list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    /* Smaller cards allowed */
+    gap: 24px;
+}
+
+.mapContainer {
+    /* No sticky here, handled by sidebar container */
+    height: 300px;
+    /* Compact height */
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    background: #e0e0e0;
+}
+
+/* Pinterest/Overlay Card */
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: #000;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+    color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 420px;
+    /* Fixed tall height */
+    border: none;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.imageWrapper {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.image {
+    object-fit: cover;
+    transition: transform 0.7s ease;
+}
+
+.card:hover .image {
+    transform: scale(1.1);
+}
+
+/* Gradient Overlay */
+.card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.9) 100%);
+    z-index: 2;
+}
+
+.details {
+    position: relative;
+    z-index: 3;
+    margin-top: auto;
+    /* Push to bottom */
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.category {
+    color: #4ade80;
+    /* Bright Green for dark bg */
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    margin-bottom: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 4px 10px;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+}
+
+.hotelName {
+    font-family: "Georgia", serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    line-height: 1.1;
+    color: white;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.description {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.location {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 16px;
+    font-size: 0.85rem;
+}
+
+/* Footer (Price & CTA) */
+.footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0;
+    border-top: none;
+}
+
+.price {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: white;
+}
+
+.price span {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.cta {
+    background: white;
+    color: #111;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    transition: all 0.3s;
+}
+
+.card:hover .cta {
+    background: #036b5a;
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+    .splitLayout {
+        grid-template-columns: 1fr;
+    }
+
+    .mapContainer {
+        display: none;
+    }
+
+    .list {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .list {
+        grid-template-columns: 1fr;
+    }
+}
