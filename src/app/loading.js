@@ -7,13 +7,14 @@ export default function Loading() {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            height: '100vh',
+            height: '100dvh',
             width: '100vw',
             position: 'fixed',
             top: 0,
             left: 0,
-            backgroundColor: 'rgba(255, 255, 255, 0.8)',
-            zIndex: 9999
+            backgroundColor: '#ffffff', // Solid white background
+            zIndex: 99999,
+            overflow: 'hidden'
         }}>
             <Loader />
         </div>
