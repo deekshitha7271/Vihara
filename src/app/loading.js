@@ -7,13 +7,13 @@ export default function Loading() {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            height: '100dvh',
+            height: '100vh',
             width: '100vw',
             position: 'fixed',
             top: 0,
             left: 0,
-            backgroundColor: 'rgba(255, 255, 255, 1)', // Make it opaque to hide the cut layout behind
-            zIndex: 99999
+            backgroundColor: 'rgba(255, 255, 255, 0.8)',
+            zIndex: 9999
         }}>
             <Loader />
         </div>
