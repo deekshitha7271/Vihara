@@ -87,21 +87,37 @@ export default function LocationCollection() {
 
   ];
 
+  // Pagination State
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+
   const filteredCollections = collections.filter((item) => {
     if (!item) return false;
     if (activeTab === "All") return true;
     const cat = (item.category || "").toString().trim().toLowerCase();
     return cat === activeTab.toString().trim().toLowerCase();
   });
-  //   const filteredCollections = collections.filter((item) => {
-  //   if (!item) return false;
-  //   if (activeTab === "All") return true;
-  //   const cat = (item.category || "").toString().trim().toLowerCase();
-  //   return cat === activeTab.toString().trim().toLowerCase();
-  // });
 
+  // Reset page when tab changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeTab]);
 
+  // Calculate pagination
+  const totalItems = filteredCollections.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const paginatedItems = filteredCollections.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+      // Optional: Scroll to top of grid
+      // window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   return (
     <section className={styles.section}>
@@ -137,40 +153,73 @@ export default function LocationCollection() {
             <Loader />
           </div>
         ) : (
-          <div className={styles.grid}>
-            {filteredCollections && filteredCollections.length > 0 ? (
-              filteredCollections.map((item) => (
-                <article key={item._id} className={styles.card}>
-                  <div className={styles.mediaWrap}>
-                    <Image
-                      src={item.image || '/bg-resort-2.jpeg'}
-                      alt={item.location}
-                      fill
-                      quality={90}
-                      style={{ objectFit: "cover", objectPosition: "center" }}
-                      onError={(e) => {
-                        e.currentTarget.srcset = "";
-                        e.currentTarget.src = "/bg-resort-2.jpeg";
-                      }}
-                    />
+          <>
+            <div className={styles.grid}>
+              {paginatedItems && paginatedItems.length > 0 ? (
+                paginatedItems.map((item) => (
+                  <article key={item._id} className={styles.card}>
+                    <div className={styles.mediaWrap}>
+                      <Image
+                        src={item.image || '/bg-resort-2.jpeg'}
+                        alt={item.location}
+                        fill
+                        quality={90}
+                        style={{ objectFit: "cover", objectPosition: "center" }}
+                        onError={(e) => {
+                          e.currentTarget.srcset = "";
+                          e.currentTarget.src = "/bg-resort-2.jpeg";
+                        }}
+                      />
 
-                    <div className={styles.cardOverlay} />
-                    <div className={styles.cardMeta}>
-                      {/* <div className={styles.smallLabel}>DESERT-BORN MINDFULNESS</div> */}
-                      <h3 className={styles.location}>{item.location}</h3>
-                      <p className={styles.description}>{item.description}</p>
+                      <div className={styles.cardOverlay} />
+                      <div className={styles.cardMeta}>
+                        {/* <div className={styles.smallLabel}>DESERT-BORN MINDFULNESS</div> */}
+                        <h3 className={styles.location}>{item.location}</h3>
+                        <p className={styles.description}>{item.description}</p>
+                      </div>
+
+                      <Link href={`/location/${item.location}`} className={styles.cardArrow} aria-label={`Details for ${item.location}`}>
+                        <span>›</span>
+                      </Link>
                     </div>
+                  </article>
+                ))
+              ) : (
+                <div className={styles.empty}>No locations found.</div>
+              )}
+            </div>
 
-                    <Link href={`/location/${item.location}`} className={styles.cardArrow} aria-label={`Details for ${item.location}`}>
-                      <span>›</span>
-                    </Link>
-                  </div>
-                </article>
-              ))
-            ) : (
-              <div className={styles.empty}>No locations found.</div>
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <div className={styles.pagination}>
+                <button
+                  className={styles.pageBtn}
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  &lt; Prev
+                </button>
+
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <button
+                    key={page}
+                    className={`${styles.pageBtn} ${currentPage === page ? styles.activePageBtn : ""}`}
+                    onClick={() => handlePageChange(page)}
+                  >
+                    {page}
+                  </button>
+                ))}
+
+                <button
+                  className={styles.pageBtn}
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                >
+                  Next &gt;
+                </button>
+              </div>
             )}
-          </div>
+          </>
         )}
       </div>
     </section>
