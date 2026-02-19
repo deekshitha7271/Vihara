@@ -234,19 +234,21 @@ export default function RandomHeroVideo() {
     setVideoSrc(random);
   }, []);
 
-  if (!videoSrc) return null;
+  // if (!videoSrc) return null; // Removed to prevent layout shift
 
   return (
     <div className={styles.wrapper}>
-      {/* Background Video */}
-      <video
-        src={videoSrc}
-        autoPlay
-        muted
-        loop
-        playsInline
-        className={styles.video}
-      />
+      {/* Background Video - Only render if src is chosen, otherwise background color/image from CSS holds space */}
+      {videoSrc && (
+        <video
+          src={videoSrc}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className={styles.video}
+        />
+      )}
 
       {/* Overlay Layer (dark tint) */}
       <div className={styles.overlay} />
