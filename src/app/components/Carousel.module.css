@@ -1,11 +1,14 @@
 .wrapper {
   position: relative;
   width: 100%;
-  height: 98vh;           /* 🔥 FULL VIEWPORT HERO */
-  max-height: 900px;      /* optional safety cap */
-  /* border-radius: 20px; */
+  height: 100dvh;
+  /* 🔥 FULL VIEWPORT HERO */
+  /* max-height: 900px; */
+  /* Removed to prevent "cut" look on large screens */
+  background-color: #000;
+  /* Ensure solid background before video loads */
   overflow: hidden;
-  
+
 }
 
 .video {
@@ -13,7 +16,8 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;      /* fills hero perfectly */
+  object-fit: cover;
+  /* fills hero perfectly */
 }
 
 .overlay {
@@ -35,7 +39,8 @@
 }
 
 .title {
-  font-size: clamp(2rem, 4vw, 4rem);  /* responsive font */
+  font-size: clamp(2rem, 4vw, 4rem);
+  /* responsive font */
   font-weight: 600;
   margin: 0;
 }
@@ -49,8 +54,8 @@
 
 .button {
   padding: 14px 28px;
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.5);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 12px;
   color: #fff;
   cursor: pointer;
@@ -59,6 +64,6 @@
 }
 
 .button:hover {
-  background: rgba(255,255,255,0.25);
+  background: rgba(255, 255, 255, 0.25);
   transform: translateY(-3px);
 }
