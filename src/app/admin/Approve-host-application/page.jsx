@@ -37,4 +37,4 @@ export default async function AdminHostApps() {
   return (
     <AdminHostClient applications={applications} />
   );
-}   
+}

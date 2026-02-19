@@ -101,6 +101,14 @@ export default async function MyHotels() {
                                         <span className={`${styles.status} ${styles[hotel.status.toLowerCase()]}`}>
                                             {hotel.status}
                                         </span>
+                                        <a href={`/host/edit-hotel/${hotel._id}`} style={{
+                                            display: 'inline-flex', alignItems: 'center', gap: 4,
+                                            background: '#f0f0f0', padding: '4px 12px', borderRadius: '16px',
+                                            textDecoration: 'none', color: '#333', fontSize: '0.85rem', fontWeight: 600,
+                                            marginLeft: 'auto'
+                                        }}>
+                                            ✏️ Edit
+                                        </a>
                                     </div>
                                 </div>
                             </div>

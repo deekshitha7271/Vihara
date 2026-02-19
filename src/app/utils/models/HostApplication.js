@@ -1,25 +1,25 @@
 import mongoose from 'mongoose';
 
 const hostApplicationScehma = new mongoose.Schema({
-    userId:{
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref:'user',
-        required:true,
-        unique:true
+        ref: 'user',
+        required: true,
+        unique: true
     },
 
-    propertyType:String,
-    city:String,
-    propertyName:String,
-    description:String,
-    status:{
-        type:String,
-        enum:['PENDING','APPROVED','REJECTED'],
-        default:'PENDING'
+    propertyType: String,
+    city: String,
+    hostingExperience: String,
+    hostingReason: String,
+    status: {
+        type: String,
+        enum: ['PENDING', 'APPROVED', 'REJECTED'],
+        default: 'PENDING'
     },
-    submittedAt:{
-        type:Date,
-        default:Date.now
+    submittedAt: {
+        type: Date,
+        default: Date.now
     }
 
 });

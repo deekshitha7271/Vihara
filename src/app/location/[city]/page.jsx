@@ -6,7 +6,7 @@ const LocationPage = async ({ params }) => {
 
     const { city } = await params;
     const decodeCity = decodeURIComponent(city);
-    console.log("PARAMS 👉", params);
+    console.log("PARAMS ", params);
     await DBConnection();
 
     //to get only approved hotels for the city
@@ -20,7 +20,7 @@ const LocationPage = async ({ params }) => {
         _id: hotel._id.toString(),
         name: hotel.name,
         image: hotel.image,
-        description: hotel.description,
+        description: hotel.shortDescription,
         price: hotel.price,
         location: hotel.location,
         category: hotel.category,

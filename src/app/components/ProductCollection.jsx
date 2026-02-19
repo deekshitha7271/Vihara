@@ -1,26 +1,26 @@
 'use client'
 
 import Link from 'next/link'
-import React, {useState,useEffect } from 'react'
-import { Circles } from "react-loader-spinner";
+import React, { useState, useEffect } from 'react'
+import Loader from "./Loader";
 
 const ProductCollection = () => {
-    const [collections,setCollections]=useState()
-    const collectionHandler=async()=>{
-        const response=await fetch(`http://localhost:3000/api/admin/add-product`)
-        const newData = await response.json()
-        console.log("productData:",newData)
-        setCollections(newData.data)
+  const [collections, setCollections] = useState()
+  const collectionHandler = async () => {
+    const response = await fetch(`http://localhost:3000/api/admin/add-product`)
+    const newData = await response.json()
+    console.log("productData:", newData)
+    setCollections(newData.data)
 
 
-    }
-     
-    useEffect(()=>{
-        collectionHandler()
-        
-    },[])
-   
- return (
+  }
+
+  useEffect(() => {
+    collectionHandler()
+
+  }, [])
+
+  return (
     <div className="productSection">
       <h1 align="center">Select your Stay</h1>
       {collections ? (
@@ -64,15 +64,7 @@ const ProductCollection = () => {
             height: "50vh",
           }}
         >
-          <Circles
-            height="80"
-            width="80"
-            color="#4fa94d"
-            ariaLabel="circles-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-          />
+          <Loader />
         </div>
       )}
     </div>

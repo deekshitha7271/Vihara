@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { updateLocationAction } from '@/app/serverActions/locationActions';
 
 export default function CoordinateEditor({ hotelId, currentLat, currentLng, onUpdate }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -13,19 +14,15 @@ export default function CoordinateEditor({ hotelId, currentLat, currentLng, onUp
         setLoading(true);
 
         try {
-            const res = await fetch('/api/hotels/update-location', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ hotelId, lat: parseFloat(lat), lng: parseFloat(lng) })
-            });
+            const result = await updateLocationAction(hotelId, parseFloat(lat), parseFloat(lng));
 
-            if (res.ok) {
+            if (result.success) {
                 alert('Location Saved!');
                 setIsOpen(false);
                 if (onUpdate) onUpdate();
                 window.location.reload(); // Simple reload to refresh map
             } else {
-                alert('Failed to save location');
+                alert('Failed to save location: ' + result.message);
             }
         } catch (error) {
             console.error(error);

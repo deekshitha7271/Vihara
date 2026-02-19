@@ -1,0 +1,698 @@
+/* Layout */
+.container {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 24px 80px;
+    font-family: 'Inter', sans-serif;
+    color: #222;
+}
+
+/* Header */
+.header {
+    margin-bottom: 24px;
+}
+
+.title {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #222;
+}
+
+.meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #222;
+}
+
+.metaLeft {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 600;
+}
+
+.location {
+    font-weight: 500;
+    text-decoration: underline;
+    color: #222;
+}
+
+.actions {
+    display: flex;
+    gap: 16px;
+}
+
+.actionBtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: underline;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background 0.1s;
+}
+
+.actionBtn:hover {
+    background: #f7f7f7;
+}
+
+/* Gallery Grid */
+.gallery {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: repeat(2, 200px);
+    gap: 8px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 48px;
+    position: relative;
+}
+
+.mainImage {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    position: relative;
+    cursor: pointer;
+}
+
+.sideImage {
+    position: relative;
+    cursor: pointer;
+    height: 100%;
+}
+
+.showPhotosBtn {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    background: white;
+    border: 1px solid #222;
+    padding: 6px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.1s;
+}
+
+.showPhotosBtn:hover {
+    transform: scale(1.02);
+    background: #f7f7f7;
+}
+
+/* Content Layout */
+.contentGrid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 80px;
+}
+
+/* Main Content */
+.mainContent {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 48px;
+}
+
+.hostInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 32px;
+}
+
+.hostText h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.hostSubtext {
+    color: #6a6a6a;
+    font-size: 16px;
+}
+
+.avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #ddd;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Highlights */
+.highlights {
+    padding-bottom: 32px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 32px;
+}
+
+.highlightItem {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.highlightIcon {
+    margin-top: 2px;
+    color: #222;
+}
+
+.highlightText h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.highlightText p {
+    color: #6a6a6a;
+    font-size: 14px;
+}
+
+/* Description */
+.description {
+    padding-bottom: 48px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 48px;
+    line-height: 1.6;
+    color: #222;
+    font-size: 16px;
+    white-space: pre-wrap;
+}
+
+/* Amenities */
+.amenitiesSection {
+    padding-bottom: 48px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 48px;
+}
+
+.amenitiesTitle {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.amenitiesList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.amenityItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    color: #222;
+}
+
+.showAllBtn {
+    margin-top: 24px;
+    padding: 12px 24px;
+    border: 1px solid #222;
+    background: transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Location Map placeholder container */
+.mapSection {
+    padding-bottom: 48px;
+    margin-bottom: 48px;
+}
+
+.mapContainer {
+    height: 480px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f0f0f0;
+    margin-top: 24px;
+}
+
+/* Sticky Booking Sidebar */
+.sidebar {
+    position: relative;
+}
+
+.bookingCard {
+    position: sticky;
+    top: 100px;
+    padding: 24px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    background: white;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 24px;
+}
+
+.price {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.night {
+    font-size: 16px;
+    font-weight: 400;
+    color: #6a6a6a;
+}
+
+.cardRating {
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.picker {
+    border: 1px solid #b0b0b0;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    overflow: hidden;
+}
+
+.dateRow {
+    display: flex;
+    border-bottom: 1px solid #b0b0b0;
+}
+
+.dateInput {
+    flex: 1;
+    padding: 10px 12px;
+    cursor: pointer;
+}
+
+.dateInput:first-child {
+    border-right: 1px solid #b0b0b0;
+}
+
+.label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+}
+
+.val {
+    font-size: 14px;
+    color: #6a6a6a;
+}
+
+.guestInput {
+    padding: 10px 12px;
+    cursor: pointer;
+    position: relative;
+}
+
+.reserveBtn {
+    width: 100%;
+    padding: 14px;
+    background: radial-gradient(circle at center, #FF385C 0%, #E61E4D 27.5%, #E31C5F 40%, #D80565 57.5%, #D10074 75%, #CC007E 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 16px;
+    transition: transform 0.1s;
+}
+
+.reserveBtn:hover {
+    filter: brightness(1.05);
+}
+
+.chargeText {
+    text-align: center;
+    font-size: 14px;
+    color: #6a6a6a;
+    margin-bottom: 24px;
+}
+
+.costRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    color: #222;
+    margin-bottom: 12px;
+}
+
+.totalRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    font-weight: 600;
+    color: #222;
+    padding-top: 24px;
+    border-top: 1px solid #ddd;
+    margin-top: 12px;
+}
+
+
+/* Host Section Redesign */
+.hostSectionContainer {
+    padding-bottom: 48px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 48px;
+}
+
+.hostTitle {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    color: #222;
+}
+
+.hostLayout {
+    display: flex;
+    gap: 48px;
+    align-items: flex-start;
+}
+
+.hostCard {
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    padding: 32px 24px;
+    text-align: center;
+    min-width: 340px;
+    border: 1px solid #f0f0f0;
+}
+
+.hostCardFlex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.hostAvatarLarge {
+    width: 64px;
+    height: 64px;
+    position: relative;
+    margin: 0 auto 12px;
+}
+
+.badge {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background: #ff385c;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    border: 2px solid white;
+}
+
+.hostCardName {
+    font-size: 22px;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 4px;
+}
+
+.hostLabel {
+    font-size: 14px;
+    font-weight: 600;
+    color: #222;
+}
+
+.hostStats {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16px;
+}
+
+.statItem {
+    text-align: left;
+}
+
+.statValue {
+    font-size: 22px;
+    font-weight: 700;
+    color: #222;
+}
+
+.statLabelSmall {
+    font-size: 10px;
+    font-weight: 600;
+    color: #222;
+    line-height: 1.2;
+}
+
+/* Host Details (Right Side) */
+.hostDetailsRight {
+    flex: 1;
+    padding-top: 16px;
+}
+
+.hostDetailTitle {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.hostMetaList {
+    margin-bottom: 24px;
+}
+
+.hostMetaItem {
+    margin-bottom: 12px;
+    font-size: 16px;
+    color: #222;
+}
+
+.messageBtn {
+    background: #222;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 24px;
+    transition: background 0.2s;
+}
+
+.messageBtn:hover {
+    background: #000;
+}
+
+.safetyDisclaimer {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 12px;
+    color: #6a6a6a;
+    line-height: 1.4;
+    padding-top: 24px;
+    border-top: 1px solid #ddd;
+}
+
+/* Things to know */
+.thingsSection {
+    padding-bottom: 48px;
+}
+
+.thingsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.thingColumn {
+    padding-right: 16px;
+}
+
+.thingTitle {
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #222;
+}
+
+.thingText {
+    font-size: 16px;
+    color: #222;
+    margin-bottom: 8px;
+    display: block;
+    line-height: 1.4;
+}
+
+.thingLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 600;
+    text-decoration: underline;
+    margin-top: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: #222;
+}
+
+.thingLink:hover {
+    color: #000;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .container {
+        padding: 24px;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr;
+        grid-template-rows: 250px;
+    }
+
+    .sideImage {
+        display: none;
+    }
+
+    .contentGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Modal Styles */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.modalContent {
+    background: white;
+    width: 100%;
+    max-width: 600px;
+    /* Airbnb standard modal width */
+    max-height: 85vh;
+    border-radius: 12px;
+    padding: 24px;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+    animation: slideUp 0.3s ease-out;
+}
+
+.closeBtn {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    /* Close button on left for Airbnb style, or right typically */
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 8px;
+    transition: background 0.1s;
+}
+
+.closeBtn:hover {
+    background: #f7f7f7;
+}
+
+.modalTitle {
+    margin-top: 40px;
+    /* Space for close btn */
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 24px;
+}
+
+.modalSection {
+    margin-bottom: 32px;
+}
+
+.modalSection h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.modalRow {
+    padding: 16px 0;
+    border-bottom: 1px solid #ebebeb;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    color: #222;
+}
+
+.modalText {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

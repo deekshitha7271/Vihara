@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
@@ -20,32 +20,55 @@ function ChangeView({ center }) {
     return null;
 }
 
-export default function MapPicker({ city, onLocationSelect }) {
-    const [position, setPosition] = useState([20.5937, 78.9629]); // Default India
-    const [searchTerm, setSearchTerm] = useState('');
+// Component to handle map clicks
+function LocationMarker({ onSelect }) {
+    useMapEvents({
+        click(e) {
+            onSelect(e.latlng);
+        },
+    });
+    return null;
+}
 
-    // Effect to geocode city name when it changes
+export default function MapPicker({ city, lat, lng, onLocationSelect }) {
+    const [position, setPosition] = useState([20.5937, 78.9629]); // Default India
+
+    // Effect to update map when manual coordinates change
     useEffect(() => {
-        if (!city) return;
+        if (lat && lng) {
+            const newPos = [parseFloat(lat), parseFloat(lng)];
+            if (!isNaN(newPos[0]) && !isNaN(newPos[1])) {
+                setPosition(newPos);
+            }
+        }
+    }, [lat, lng]);
+
+    // Effect to geocode city name when it changes (only if no manual coords)
+    useEffect(() => {
+        if (!city || (lat && lng)) return;
 
         const delayDebounceFn = setTimeout(async () => {
             try {
                 const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city)}`);
                 const data = await response.json();
                 if (data && data.length > 0) {
-                    const { lat, lon } = data[0];
-                    const newPos = [parseFloat(lat), parseFloat(lon)];
+                    const { lat: newLat, lon } = data[0];
+                    const newPos = [parseFloat(newLat), parseFloat(lon)];
                     setPosition(newPos);
-                    // Optionally notify parent of coordinates if needed
-                    // onLocationSelect({ lat: newPos[0], lng: newPos[1] });
+                    if (onLocationSelect) onLocationSelect({ lat: newPos[0], lng: newPos[1] });
                 }
             } catch (error) {
                 console.error("Geocoding failed", error);
             }
-        }, 1000); // Debounce to avoid hitting API while typing too fast
+        }, 1000);
 
         return () => clearTimeout(delayDebounceFn);
     }, [city]);
+
+    const handleMapClick = (latlng) => {
+        setPosition([latlng.lat, latlng.lng]);
+        if (onLocationSelect) onLocationSelect({ lat: latlng.lat, lng: latlng.lng });
+    };
 
     return (
         <div style={{ height: '300px', width: '100%', borderRadius: '12px', overflow: 'hidden', border: '1px solid #ddd', zIndex: 0 }}>
@@ -60,6 +83,7 @@ export default function MapPicker({ city, onLocationSelect }) {
                     </Popup>
                 </Marker>
                 <ChangeView center={position} />
+                <LocationMarker onSelect={handleMapClick} />
             </MapContainer>
         </div>
     );

@@ -3,15 +3,15 @@ import { redirect } from "next/navigation";
 import styles from "./bookings.module.css";
 import HostSidebar from "@/app/components/HostSidebar";
 import { CalendarX, Check, X } from "lucide-react";
+import BookingActions from "./BookingActions";
+import DBConnection from "@/app/utils/config/db";
+import BookingModel from "@/app/utils/models/Booking";
+import HotelModel from "@/app/utils/models/hotel";
+import UserModel from "@/app/utils/models/User";
 
 async function getBookings() {
-    const { default: DBConnection } = await import("@/app/utils/config/db");
-    const { default: BookingModel } = await import("@/app/utils/models/Booking");
-    const { default: HotelModel } = await import("@/app/utils/models/hotel");
-    const { default: UserModel } = await import("@/app/utils/models/User"); // Ensure User model is loaded for population
-    const { auth: getSession } = await import("@/app/auth");
 
-    const session = await getSession();
+    const session = await auth();
     if (!session) return [];
 
     await DBConnection();
@@ -99,20 +99,7 @@ export default async function Bookings() {
                                 {/* Actions - Only for Pending */}
                                 {booking.status === 'PENDING' && (
                                     <div className={styles.actions}>
-                                        {/* TODO: Add Server Actions for Accept/Reject. 
-                                            For now, just UI placeholders or we can implement form actions.
-                                        */}
-                                        <form action={`/api/host/bookings/approve?id=${booking._id}`} method="POST">
-                                            <button className={`${styles.btn} ${styles.acceptBtn}`} title="Accept Booking">
-                                                <Check size={20} />
-                                            </button>
-                                        </form>
-
-                                        <form action={`/api/host/bookings/reject?id=${booking._id}`} method="POST">
-                                            <button className={`${styles.btn} ${styles.rejectBtn}`} title="Reject Booking">
-                                                <X size={20} />
-                                            </button>
-                                        </form>
+                                        <BookingActions bookingId={booking._id} />
                                     </div>
                                 )}
                             </div>

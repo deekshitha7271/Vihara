@@ -93,19 +93,46 @@ export async function POST(request) {
   try {
     await writeFile(imagePath, buffer);
 
+    // 6.1 Process Gallery Images
+    const galleryFiles = data.getAll("gallery");
+    const galleryPaths = [];
+
+    for (const file of galleryFiles) {
+      if (file && file.name) {
+        const gBuffer = Buffer.from(await file.arrayBuffer());
+        const gPath = path.join(process.cwd(), "public", "uploads", file.name);
+        await writeFile(gPath, gBuffer);
+        galleryPaths.push(`/uploads/${file.name}`);
+      }
+    }
+
+    const amenities = JSON.parse(data.get("amenities") || "[]");
+    const facilities = JSON.parse(data.get("facilities") || "{}");
+    const houseRules = JSON.parse(data.get("houseRules") || "[]");
+    const checkInTime = data.get("checkInTime");
+    const checkOutTime = data.get("checkOutTime");
+    const shortDescription = data.get("shortDescription");
+
     // 7️⃣ Create hotel
     const newHotel = new HotelModel({
       name,
       location: locationDoc.location, // keep clean
       description,
+      shortDescription,
       category,
       price,
       image: `/uploads/${image.name}`,
+      images: galleryPaths,
       ownerId,
       status: "PENDING",
       isFeatured: false,
       lat: data.get("lat"), // Save latitude
-      lng: data.get("lng")  // Save longitude
+      lng: data.get("lng"),  // Save longitude
+      amenities,
+      facilities,
+      checkInTime,
+      checkOutTime,
+      houseRules
     });
 
     await newHotel.save();

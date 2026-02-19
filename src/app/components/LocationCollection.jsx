@@ -44,21 +44,26 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Circles } from "react-loader-spinner";
+import Loader from "./Loader";
 import styles from "./LocationCollection.module.css";
+import { motion } from "framer-motion";
+
+import { getLocationsAction } from "@/app/serverActions/locationActions";
 
 export default function LocationCollection() {
   const [collections, setCollections] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState("Wellness");
+  const [activeTab, setActiveTab] = useState("All");
 
   useEffect(() => {
     async function fetchCollections() {
       try {
-        const res = await fetch("http://localhost:3001/api/admin/add-location");
-        const json = await res.json();
-        setCollections(json.data || []);
-        console.log("fetched", collections)
+        const res = await getLocationsAction();
+        if (res.success) {
+          setCollections(res.data || []);
+        } else {
+          console.error("Failed to fetch locations:", res.message);
+        }
       } catch (e) {
         console.error("fetch error:", e);
         setCollections([]);
@@ -69,11 +74,15 @@ export default function LocationCollection() {
     fetchCollections();
   }, []);
 
+
   const tabs = [
-    { label: "Wellness", value: "Wellness" },
-    { label: "Family", value: "Family" },
     { label: "All-Inclusive", value: "All-Inclusive" },
+    { label: "Family", value: "Family" },
     { label: "Short Gateways", value: "Short Gateways" },
+
+    { label: "Wellness", value: "Wellness" },
+
+
     { label: "All", value: "All" },
 
   ];
@@ -100,6 +109,7 @@ export default function LocationCollection() {
         <header className={styles.header}>
           <h2 className={styles.title}>Your Stay, Your Story</h2>
 
+
           <nav className={styles.tabs} aria-label="collection categories">
             {tabs.map((t) => (
               <button
@@ -108,6 +118,13 @@ export default function LocationCollection() {
                 onClick={() => setActiveTab(t.value)}
               >
                 {t.label}
+                {t.value === activeTab && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className={styles.activeLine}
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  />
+                )}
               </button>
             ))}
           </nav>
@@ -117,7 +134,7 @@ export default function LocationCollection() {
 
         {loading ? (
           <div className={styles.loaderWrap}>
-            <Circles height="72" width="72" color="#ffffff" />
+            <Loader />
           </div>
         ) : (
           <div className={styles.grid}>
@@ -125,15 +142,17 @@ export default function LocationCollection() {
               filteredCollections.map((item) => (
                 <article key={item._id} className={styles.card}>
                   <div className={styles.mediaWrap}>
-                    {/* Use unoptimized for external images or configure next.config.js */}
                     <Image
-                      src={item.image}
+                      src={item.image || '/bg-resort-2.jpeg'}
                       alt={item.location}
                       fill
                       quality={90}
                       style={{ objectFit: "cover", objectPosition: "center" }}
+                      onError={(e) => {
+                        e.currentTarget.srcset = "";
+                        e.currentTarget.src = "/bg-resort-2.jpeg";
+                      }}
                     />
-
 
                     <div className={styles.cardOverlay} />
                     <div className={styles.cardMeta}>

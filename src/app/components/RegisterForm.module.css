@@ -6,9 +6,6 @@
     justify-content: center;
     height: 100vh;
     width: 100vw;
-    background:
-        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-        url('/resort-2.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -72,7 +69,7 @@
 
 .buttonElement {
     padding: 16px;
-    background-color: rgb(3, 107, 90);
+    background-color: rgb(23, 29, 28);
     /* Primary Vihara Teal */
     color: white;
     border: none;

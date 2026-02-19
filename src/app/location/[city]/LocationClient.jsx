@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 import styles from './LocationClient.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -15,6 +16,13 @@ export default function LocationClient({ city, hotels }) {
     // Decode city (e.g. "Thekkady%20..." -> "Thekkady ...") and remove "hotels-in-" logic if any
     // Assuming 'city' comes in clean or needs simple space decoding
     const displayCity = city.replace(/%20/g, ' ');
+
+    const [activeFilter, setActiveFilter] = useState('All');
+
+    const filteredHotels = hotels.filter(hotel => {
+        if (activeFilter === 'All') return true;
+        return (hotel.category || "").toLowerCase() === activeFilter.toLowerCase();
+    });
 
     return (
         <div className={styles.container}>
@@ -38,10 +46,12 @@ export default function LocationClient({ city, hotels }) {
                 </div>
             </div>
 
+
+
             {/* Content Section */}
             <div className={styles.contentInner}>
 
-                {hotels.length === 0 ? (
+                {filteredHotels.length === 0 ? (
                     <div style={{ textAlign: 'center', padding: '60px', color: '#666' }}>
                         <h2>No properties found currently</h2>
                         <p>We are expanding our collection in {displayCity} soon.</p>
@@ -50,7 +60,7 @@ export default function LocationClient({ city, hotels }) {
                     <div className={styles.splitLayout}>
                         {/* LEFT: Hotel List */}
                         <div className={styles.list}>
-                            {hotels.map((hotel) => (
+                            {filteredHotels.map((hotel) => (
                                 <Link key={hotel._id} href={`/detail/${hotel._id}`} className={styles.card}>
                                     <div className={styles.imageWrapper}>
                                         <Image
@@ -92,15 +102,30 @@ export default function LocationClient({ city, hotels }) {
 
                         {/* RIGHT: Sidebar (Map + Weather) */}
                         <div className={styles.sidebar}>
+                            {/* Filter in Sidebar */}
+                            <div className={styles.selectWrapper} style={{ marginBottom: '20px', width: '100%' }}>
+                                <select
+                                    className={styles.filterSelect}
+                                    value={activeFilter}
+                                    onChange={(e) => setActiveFilter(e.target.value)}
+                                    style={{ width: '100%' }}
+                                >
+                                    <option value="All">All Categories</option>
+                                    <option value="Resort">Resort</option>
+                                    <option value="Hotel">Hotel</option>
+                                    <option value="Villa">Villa</option>
+                                </select>
+                            </div>
+
                             <div className={styles.mapContainer}>
-                                <MapComponent hotels={hotels} />
+                                <MapComponent hotels={filteredHotels} />
                             </div>
 
                             {/* Live Weather Widget */}
-                            {hotels.length > 0 && (
+                            {filteredHotels.length > 0 && (
                                 <WeatherComponent
-                                    lat={hotels[0].lat || 9.93}
-                                    lng={hotels[0].lng || 76.26}
+                                    lat={filteredHotels[0].lat || 9.93}
+                                    lng={filteredHotels[0].lng || 76.26}
                                     city={displayCity}
                                 />
                             )}

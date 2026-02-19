@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./onboarding.module.css";
+import { applyHostAction } from "@/app/serverActions/userActions";
 // Ensure lucide-react is installed or use alternatives
 import { Home, Building2, Palmtree, MapPin, CheckCircle } from "lucide-react";
 import dynamic from 'next/dynamic';
@@ -18,8 +19,8 @@ export default function HostOnboarding() {
   const [data, setData] = useState({
     propertyType: "",
     city: "",
-    propertyName: "",
-    description: "",
+    hostingExperience: "",
+    hostingReason: "",
     guests: 4,
     bedrooms: 2,
     bathrooms: 1,
@@ -32,8 +33,8 @@ export default function HostOnboarding() {
     { id: 0, title: "Welcome", bg: "rgb(3, 107, 90)" }, // Vihara Primary Teal
     { id: 1, title: "Property Type", bg: "#02594a" }, // Darker Teal
     { id: 2, title: "Location", bg: "#047d69" }, // Lighter Teal
-    { id: 3, title: "Details", bg: "rgb(3, 107, 90)" }, // Primary Teal
-    { id: 4, title: "Review", bg: "rgb(46, 43, 43)" }, // Vihara Dark Grey (Nav)
+    { id: 3, title: "About You", bg: "rgb(3, 107, 90)" }, // Primary Teal
+    { id: 4, title: "Review", bg: "rgb(3, 107, 90)" }, // Vihara Primary Teal
   ];
 
   const next = () => setStep(step + 1);
@@ -46,30 +47,25 @@ export default function HostOnboarding() {
   const submit = async () => {
     setLoading(true);
     try {
-      // Ensuring guest/room data is formatted if API expects it, or just send core data
-      const payload = {
-        ...data,
-        // Add any defaults if needed by schema
-      };
+      const formData = new FormData();
+      formData.append("propertyType", data.propertyType);
+      formData.append("city", data.city);
+      formData.append("hostingExperience", data.hostingExperience);
+      formData.append("hostingReason", data.hostingReason);
+      formData.append("guests", data.guests);
+      formData.append("bedrooms", data.bedrooms);
+      formData.append("bathrooms", data.bathrooms);
 
-      const res = await fetch('/api/host/apply', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
+      const result = await applyHostAction(formData);
 
-      if (res.ok) {
+      if (result.success) {
         alert('Application sent for approval! Redirecting...');
         window.location.href = '/host/dashboard';
       } else {
-        const errorData = await res.json();
-        // If already submitted, redirect to dashboard anyway
-        if (res.status === 409) {
-          alert(errorData.message);
+        alert(result.message || 'Failed to submit application.');
+        if (result.message.includes("already")) {
           window.location.href = '/host/dashboard';
-          return;
         }
-        alert(errorData.message || 'Failed to submit application.');
       }
     } catch (e) {
       console.error(e);
@@ -98,7 +94,7 @@ export default function HostOnboarding() {
           {step === 0 && <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }}>It’s easy to get started on Vihara</motion.h1>}
           {step === 1 && <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }}>What kind of place will you host?</motion.h1>}
           {step === 2 && <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }}>Where is your place located?</motion.h1>}
-          {step === 3 && <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }}>Let's give your place a name</motion.h1>}
+          {step === 3 && <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }}>Tell us about yourself</motion.h1>}
           {step === 4 && <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }}>Review your details</motion.h1>}
         </div>
       </motion.div>
@@ -170,18 +166,18 @@ export default function HostOnboarding() {
               {/* STEP 3: DETAILS */}
               {step === 3 && (
                 <div>
-                  <h2 className={styles.stepTitle}>Give your place a title and description</h2>
+                  <h2 className={styles.stepTitle}>Tell us about your experience</h2>
                   <input
                     className={styles.input}
-                    placeholder="Property Title (e.g. Seaside Villa)"
-                    value={data.propertyName}
-                    onChange={(e) => handleChange('propertyName', e.target.value)}
+                    placeholder="Hosting Experience (e.g. 2 years on Airbnb)"
+                    value={data.hostingExperience}
+                    onChange={(e) => handleChange('hostingExperience', e.target.value)}
                   />
                   <textarea
                     className={styles.textarea}
-                    placeholder="Describe your place..."
-                    value={data.description}
-                    onChange={(e) => handleChange('description', e.target.value)}
+                    placeholder="Why do you want to host on Vihara? (e.g. I have a new resort...)"
+                    value={data.hostingReason}
+                    onChange={(e) => handleChange('hostingReason', e.target.value)}
                   />
                 </div>
               )}
@@ -193,8 +189,8 @@ export default function HostOnboarding() {
                   <div className={styles.card} style={{ alignItems: 'flex-start', background: '#f9f9f9' }}>
                     <p><strong>Type:</strong> {data.propertyType}</p>
                     <p><strong>City:</strong> {data.city}</p>
-                    <p><strong>Name:</strong> {data.propertyName}</p>
-                    <p><strong>Description:</strong> {data.description}</p>
+                    <p><strong>Experience:</strong> {data.hostingExperience}</p>
+                    <p><strong>Reason:</strong> {data.hostingReason}</p>
                   </div>
                 </div>
               )}
@@ -222,7 +218,7 @@ export default function HostOnboarding() {
               disabled={
                 (step === 1 && !data.propertyType) ||
                 (step === 2 && !data.city) ||
-                (step === 3 && !data.propertyName)
+                (step === 3 && !data.hostingExperience)
               }
             >
               {step === 0 ? 'Get Started' : 'Next'}

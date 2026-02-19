@@ -1,47 +1,57 @@
 'use client';
+import { useState } from 'react';
 import styles from '../admin.module.css';
+import { approveHostAction, rejectHostAction } from '@/app/serverActions/adminActions';
+import Swal from 'sweetalert2';
 
 export default function AdminHostClient({ applications }) {
+    const [apps, setApps] = useState(applications);
 
-    const handleApprove = async (applicationId) => {
+    const handleStatusUpdate = async (id, status, name) => {
         try {
-            const res = await fetch('/api/admin/approve-host', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ applicationId })
+            const result = await Swal.fire({
+                title: `Are you sure?`,
+                text: `Do you want to ${status} ${name}'s application?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: `Yes, ${status} it!`
             });
-            const data = await res.json();
-            if (res.ok) {
-                alert(data.message || 'Application approved successfully');
-                window.location.reload();
-            } else {
-                alert(data.message || 'Failed to approve application');
+
+            if (result.isConfirmed) {
+                let actionResult;
+                if (status === 'approve') {
+                    actionResult = await approveHostAction(id);
+                } else {
+                    actionResult = await rejectHostAction(id);
+                }
+
+                if (actionResult.success) {
+                    Swal.fire(
+                        'Success!',
+                        actionResult.message,
+                        'success'
+                    );
+                    // Refresh list locally
+                    setApps(apps.filter(app => app._id !== id));
+                } else {
+                    Swal.fire(
+                        'Error!',
+                        actionResult.message,
+                        'error'
+                    );
+                }
             }
         } catch (error) {
-            console.error("Approval error:", error);
-            alert("An error occurred while approving.");
+            console.error("Confirmation error", error);
+            Swal.fire(
+                'Error!',
+                'An unexpected error occurred.',
+                'error'
+            );
         }
-    }
-
-    const handleReject = async (applicationId) => {
-        try {
-            const res = await fetch('/api/admin/reject-host', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ applicationId })
-            });
-            const data = await res.json();
-            if (res.ok) {
-                alert(data.message || 'Application rejected successfully');
-                window.location.reload();
-            } else {
-                alert(data.message || 'Failed to reject application');
-            }
-        } catch (error) {
-            console.error("Rejection error:", error);
-            alert("An error occurred while rejecting.");
-        }
-    }
+    };
 
     return (
         <div className={styles.container}>
@@ -49,13 +59,13 @@ export default function AdminHostClient({ applications }) {
                 <h1 className={styles.title}>Host Applications</h1>
             </header>
 
-            {applications.length === 0 ? (
+            {apps.length === 0 ? (
                 <div className={styles.empty}>
                     <p>No new host applications to review.</p>
                 </div>
             ) : (
                 <div className={styles.grid}>
-                    {applications.map(app => (
+                    {apps.map(app => (
                         <div key={app._id} className={styles.card}>
                             <div className={styles.cardHeader}>
                                 <div>
@@ -65,8 +75,13 @@ export default function AdminHostClient({ applications }) {
                             </div>
 
                             <div className={styles.infoRow}>
-                                <span className={styles.label}>Property Name</span>
-                                <span className={styles.value}>{app.propertyName}</span>
+                                <span className={styles.label}>Experience</span>
+                                <span className={styles.value}>{app.hostingExperience}</span>
+                            </div>
+
+                            <div className={styles.infoRow}>
+                                <span className={styles.label}>Reason</span>
+                                <span className={styles.value}>{app.hostingReason}</span>
                             </div>
 
                             <div className={styles.infoRow}>
@@ -75,10 +90,10 @@ export default function AdminHostClient({ applications }) {
                             </div>
 
                             <div className={styles.actions}>
-                                <button className={styles.rejectBtn} onClick={() => handleReject(app._id)}>
+                                <button className={styles.rejectBtn} onClick={() => handleStatusUpdate(app._id, 'reject', app.userId.username)}>
                                     Reject
                                 </button>
-                                <button className={styles.approveBtn} onClick={() => handleApprove(app._id)}>
+                                <button className={styles.approveBtn} onClick={() => handleStatusUpdate(app._id, 'approve', app.userId.username)}>
                                     Approve Host
                                 </button>
                             </div>
@@ -87,5 +102,5 @@ export default function AdminHostClient({ applications }) {
                 </div>
             )}
         </div>
-    )
+    );
 }

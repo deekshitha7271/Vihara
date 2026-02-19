@@ -47,16 +47,23 @@ export default function MapComponent({ hotels }) {
                 >
                     <Popup>
                         <div style={{ width: '200px', padding: '0px' }}>
-                            {hotel.image && (
-                                <div style={{
+                            <img
+                                src={hotel.image || '/bg-resort-2.jpeg'}
+                                alt={hotel.name}
+                                style={{
                                     width: '100%',
                                     height: '100px',
-                                    backgroundImage: `url(${hotel.image})`,
-                                    backgroundSize: 'cover',
+                                    objectFit: 'cover',
                                     borderRadius: '8px 8px 0 0',
-                                    marginBottom: '8px'
-                                }} />
-                            )}
+                                    marginBottom: '8px',
+                                    display: 'block'
+                                }}
+                                onError={(e) => {
+                                    e.currentTarget.style.display = 'none';
+                                    e.currentTarget.src = '/bg-resort-2.jpeg';
+                                    e.currentTarget.style.display = 'block';
+                                }}
+                            />
                             <div style={{ padding: '0 4px 4px' }}>
                                 <strong style={{ fontSize: '1rem', display: 'block', marginBottom: '4px' }}>{hotel.name}</strong>
                                 <span style={{ color: '#036b5a', fontWeight: 'bold' }}>₹{hotel.price}</span> / night
