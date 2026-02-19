@@ -8,7 +8,7 @@
 // export default function Navbar() {
 //   return (
 //     <header className={styles.navbar}>
-      
+
 //       {/* <div className={styles.navbar__logo}>
 //         <Image src="/logo.png" alt="Vihara Resort Logo" height={200} width={200}/>
 //       </div> */}
@@ -66,7 +66,7 @@ export default function UserNavigation() {
     <header className={styles.navbar}>
       <nav className={styles.navbar__links}>
         <Link href="/">HOME</Link>
-        <Link href="/resort">RESORT</Link>
+        <Link href="/resorts">RESORT</Link>
         <Link href="/facilities">FACILITIES</Link>
         <Link href="/gallery">GALLERY</Link>
         <Link href="/blog">BLOG</Link>
