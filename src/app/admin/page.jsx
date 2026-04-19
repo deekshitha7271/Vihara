@@ -2,7 +2,6 @@ import Link from "next/link";
 import { auth } from "../auth";
 import { redirect } from "next/navigation";
 import AdminNavbar from "../components/adminNavbar";
-import AddProduct from "../components/AddProduct";
 import AddLocation from "../components/AddLocation";
 
 const AdminPage = async () => {
@@ -12,7 +11,7 @@ const AdminPage = async () => {
     }
     return ( 
     <div>
-       {session?(<><AdminNavbar/><AddProduct/><AddLocation/></>)
+       {session?(<><AdminNavbar/><AddLocation/></>)
        :
        (<h1>Not Authorized</h1>)
        }

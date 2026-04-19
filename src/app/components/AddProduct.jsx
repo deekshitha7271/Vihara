@@ -1,5 +1,4 @@
 'use client'
-import { productAction } from '../serverActions/productAction';
 import admin from './components.module.css'
 import { useState } from 'react';
 const AddProduct = () => {

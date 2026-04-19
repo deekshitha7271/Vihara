@@ -2,24 +2,15 @@
 import { useState } from 'react';
 import styles from '../admin.module.css';
 import { approveHostAction, rejectHostAction } from '@/app/serverActions/adminActions';
-import Swal from 'sweetalert2';
 
 export default function AdminHostClient({ applications }) {
     const [apps, setApps] = useState(applications);
 
     const handleStatusUpdate = async (id, status, name) => {
         try {
-            const result = await Swal.fire({
-                title: `Are you sure?`,
-                text: `Do you want to ${status} ${name}'s application?`,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: `Yes, ${status} it!`
-            });
+            const isConfirmed = window.confirm(`Are you sure you want to ${status} ${name}'s application?`);
 
-            if (result.isConfirmed) {
+            if (isConfirmed) {
                 let actionResult;
                 if (status === 'approve') {
                     actionResult = await approveHostAction(id);
@@ -28,28 +19,15 @@ export default function AdminHostClient({ applications }) {
                 }
 
                 if (actionResult.success) {
-                    Swal.fire(
-                        'Success!',
-                        actionResult.message,
-                        'success'
-                    );
-                    // Refresh list locally
+                    alert(`${status} successful!`);
                     setApps(apps.filter(app => app._id !== id));
                 } else {
-                    Swal.fire(
-                        'Error!',
-                        actionResult.message,
-                        'error'
-                    );
+                    alert(`Error: ${actionResult.message}`);
                 }
             }
         } catch (error) {
-            console.error("Confirmation error", error);
-            Swal.fire(
-                'Error!',
-                'An unexpected error occurred.',
-                'error'
-            );
+            console.error(error);
+            alert('An unexpected error occurred.');
         }
     };
 

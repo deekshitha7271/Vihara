@@ -143,16 +143,15 @@ export default function AddHotel() {
 
           <form action={handleAction}>
             {/* Image Upload */}
-            <div style={{ marginBottom: '32px' }}>
+            <div className={styles.marginBottom32}>
               <label className={styles.label}>Property Image</label>
               <div
-                className={styles.fileUpload}
+                className={`${styles.fileUpload} ${imagePreview ? styles.imagePreviewWrapper : ''}`}
                 onClick={() => document.getElementById('fileInput').click()}
-                style={imagePreview ? { padding: 0, overflow: 'hidden', border: 'none' } : {}}
               >
                 {imagePreview ? (
-                  <div style={{ position: 'relative', height: '300px' }}>
-                    <img src={imagePreview} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <div className={styles.imagePreviewWrapper}>
+                    <img src={imagePreview} alt="Preview" className={styles.imagePreviewImg} />
                     <button
                       type="button"
                       onClick={(e) => {
@@ -160,11 +159,7 @@ export default function AddHotel() {
                         setImage(null);
                         setImagePreview(null);
                       }}
-                      style={{
-                        position: 'absolute', top: 10, right: 10,
-                        background: 'white', border: 'none',
-                        borderRadius: '50%', padding: '8px', cursor: 'pointer'
-                      }}
+                      className={styles.imagePreviewRemoveBtn}
                     >
                       <X size={20} />
                     </button>
@@ -172,8 +167,8 @@ export default function AddHotel() {
                 ) : (
                   <div>
                     <Upload size={40} className={styles.uploadIcon} />
-                    <p style={{ fontWeight: 600 }}>Click to upload cover image</p>
-                    <p style={{ fontSize: '0.9rem', color: '#888' }}>SVG, PNG, JPG or GIF (max. 5MB)</p>
+                    <p className={styles.uploadIconText}>Click to upload cover image</p>
+                    <p className={styles.uploadIconSubtext}>SVG, PNG, JPG or GIF (max. 5MB)</p>
                   </div>
                 )}
                 <input
@@ -181,8 +176,7 @@ export default function AddHotel() {
                   type="file"
                   accept="image/*"
                   onChange={handleImageChange}
-                  style={{ display: 'none' }}
-                // Not strictly required if handled via state logic for formData append
+                  className={styles.hiddenInput}
                 />
               </div>
             </div>
@@ -280,11 +274,11 @@ export default function AddHotel() {
                 />
               </div>
             </div>
-            <p style={{ fontSize: '0.85rem', color: '#666', marginTop: '-12px', marginBottom: '24px' }}>
+            <p className={styles.coordinateInfo}>
               * Right-click on Google Maps to get these coordinates. This ensures your hotel appears correctly on the map.
             </p>
 
-            <div style={{ marginBottom: '24px' }}>
+            <div className={styles.marginBottom24}>
               <label className={styles.label}>Short Description (for card view)</label>
               <input
                 className={styles.input}
@@ -296,7 +290,7 @@ export default function AddHotel() {
               />
             </div>
 
-            <div style={{ marginBottom: '24px' }}>
+            <div className={styles.marginBottom24}>
               <label className={styles.label}>Description (Full Details)</label>
               <textarea
                 className={styles.textarea}
@@ -309,34 +303,33 @@ export default function AddHotel() {
             </div>
 
             {/* Gallery Upload */}
-            <div style={{ marginBottom: '32px' }}>
+            <div className={styles.marginBottom32}>
               <label className={styles.label}>Gallery Images</label>
               <div
-                className={styles.fileUpload}
+                className={`${styles.fileUpload} ${styles.galleryUploadContainer}`}
                 onClick={() => document.getElementById('galleryInput').click()}
-                style={{ padding: '2rem', borderStyle: 'dashed' }}
               >
                 <Upload size={30} className={styles.uploadIcon} />
-                <p style={{ fontWeight: 600 }}>Upload additional photos</p>
-                <p style={{ fontSize: '0.9rem', color: '#888' }}>Select multiple files (max 10)</p>
+                <p className={styles.uploadIconText}>Upload additional photos</p>
+                <p className={styles.uploadIconSubtext}>Select multiple files (max 10)</p>
                 <input
                   id="galleryInput"
                   type="file"
                   multiple
                   accept="image/*"
                   onChange={handleGalleryChange}
-                  style={{ display: 'none' }}
+                  className={styles.hiddenInput}
                 />
               </div>
               {galleryPreviews.length > 0 && (
-                <div style={{ display: 'flex', gap: '10px', marginTop: '10px', overflowX: 'auto' }}>
+                <div className={styles.galleryPreviewsContainer}>
                   {galleryPreviews.map((src, i) => (
-                    <div key={i} style={{ position: 'relative', width: '100px', height: '100px', flexShrink: 0 }}>
-                      <img src={src} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }} alt={`Gallery ${i}`} />
+                    <div key={i} className={styles.galleryPreviewItem}>
+                      <img src={src} className={styles.galleryPreviewImg} alt={`Gallery ${i}`} />
                       <button
                         type="button"
                         onClick={() => removeGalleryImage(i)}
-                        style={{ position: 'absolute', top: 0, right: 0, background: 'red', color: 'white', border: 'none', borderRadius: '50%', width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
+                        className={styles.galleryPreviewRemoveBtn}
                       >
                         <X size={14} />
                       </button>
@@ -404,11 +397,11 @@ export default function AddHotel() {
 
             {/* Custom Amenities */}
             {/* Custom Amenities */}
-            <div style={{ marginBottom: '24px', marginTop: '24px' }}>
+            <div className={styles.marginTop24}>
               <label className={styles.label}>Amenities</label>
 
               {/* Predefined Chips */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '16px' }}>
+              <div className={styles.amenitiesContainer}>
                 {PREDEFINED_AMENITIES.map(opt => (
                   <button
                     type="button"
@@ -419,21 +412,14 @@ export default function AddHotel() {
                         : [...formDataState.amenities, opt];
                       setFormDataState({ ...formDataState, amenities: newAmenities });
                     }}
-                    style={{
-                      background: formDataState.amenities.includes(opt) ? '#333' : '#f0f0f0',
-                      color: formDataState.amenities.includes(opt) ? '#fff' : '#333',
-                      border: 'none',
-                      padding: '6px 16px',
-                      borderRadius: '20px',
-                      cursor: 'pointer'
-                    }}
+                    className={`${styles.amenityChip} ${formDataState.amenities.includes(opt) ? styles.amenityChipActive : styles.amenityChipInactive}`}
                   >
                     {opt}
                   </button>
                 ))}
               </div>
 
-              <div style={{ display: 'flex', gap: '10px', marginBottom: '12px' }}>
+              <div className={styles.customInputWrapper}>
                 <input
                   className={styles.input}
                   placeholder="Add custom amenity..."
@@ -450,7 +436,7 @@ export default function AddHotel() {
                     }
                   }}
                 />
-                <button type="button" className={styles.submitBtn} style={{ width: 'auto', padding: '0 20px' }} onClick={() => {
+                <button type="button" className={`${styles.submitBtn} ${styles.customAddBtn}`} onClick={() => {
                   const val = customAmenityInput.trim();
                   if (val && !formDataState.amenities.includes(val)) {
                     setFormDataState({ ...formDataState, amenities: [...formDataState.amenities, val] });
@@ -460,26 +446,15 @@ export default function AddHotel() {
               </div>
 
               {/* Display Custom Added Amenities */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '8px' }}>
+              <div className={styles.addedTagsContainer}>
                 {formDataState.amenities
                   .filter(a => !PREDEFINED_AMENITIES.includes(a))
                   .map((amenity, index) => (
-                    <span key={index} style={{
-                      background: '#fff3e0',
-                      padding: '6px 12px',
-                      borderRadius: '16px',
-                      fontSize: '14px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      border: '1px solid #ffcc80'
-                    }}>
+                    <span key={index} className={styles.addedTagChip}>
                       {amenity}
                       <button type="button" onClick={() => {
                         setFormDataState({ ...formDataState, amenities: formDataState.amenities.filter(a => a !== amenity) });
-                      }} style={{
-                        border: 'none', background: 'transparent', cursor: 'pointer', fontWeight: 'bold', color: '#666', padding: 0, display: 'flex', alignItems: 'center'
-                      }}>
+                      }} className={styles.removeTagBtn}>
                         <X size={14} />
                       </button>
                     </span>
@@ -488,8 +463,8 @@ export default function AddHotel() {
             </div>
 
             {/* Policies Section */}
-            <div style={{ marginBottom: '32px', borderTop: '1px solid #eee', paddingTop: '24px' }}>
-              <h3 className={styles.label} style={{ fontSize: '1.2rem', marginBottom: '16px' }}>Property Policies</h3>
+            <div className={styles.policiesSection}>
+              <h3 className={styles.policiesTitle}>Property Policies</h3>
 
               <div className={styles.grid}>
                 <div>
@@ -515,9 +490,9 @@ export default function AddHotel() {
               </div>
 
               {/* House Rules */}
-              <div style={{ marginTop: '24px' }}>
+              <div className={styles.houseRulesContainer}>
                 <label className={styles.label}>House Rules</label>
-                <div style={{ display: 'flex', gap: '10px', marginBottom: '12px' }}>
+                <div className={styles.customInputWrapper}>
                   <input
                     className={styles.input}
                     placeholder="Add a rule (e.g. No smoking)"
@@ -534,7 +509,7 @@ export default function AddHotel() {
                       }
                     }}
                   />
-                  <button type="button" className={styles.submitBtn} style={{ width: 'auto', padding: '0 20px' }} onClick={() => {
+                  <button type="button" className={`${styles.submitBtn} ${styles.customAddBtn}`} onClick={() => {
                     const val = customHouseRuleInput.trim();
                     if (val && !formDataState.houseRules.includes(val)) {
                       setFormDataState({ ...formDataState, houseRules: [...formDataState.houseRules, val] });
@@ -544,24 +519,13 @@ export default function AddHotel() {
                 </div>
 
                 {formDataState.houseRules.length > 0 && (
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                  <div className={styles.addedTagsContainer}>
                     {formDataState.houseRules.map((rule, index) => (
-                      <span key={index} style={{
-                        background: '#fff3e0',
-                        padding: '6px 12px',
-                        borderRadius: '16px',
-                        fontSize: '14px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '6px',
-                        border: '1px solid #ffcc80'
-                      }}>
+                      <span key={index} className={styles.addedTagChip}>
                         {rule}
                         <button type="button" onClick={() => {
                           setFormDataState({ ...formDataState, houseRules: formDataState.houseRules.filter(r => r !== rule) });
-                        }} style={{
-                          border: 'none', background: 'transparent', cursor: 'pointer', fontWeight: 'bold', color: '#666', padding: 0, display: 'flex', alignItems: 'center'
-                        }}>
+                        }} className={styles.removeTagBtn}>
                           <X size={14} />
                         </button>
                       </span>

@@ -26,6 +26,7 @@ const HomePage = async () => {
       {/* USER + HOST SEE SAME HOME */}
       {(role === "user" || role === "host") && (
         <>
+        
           <UserNavigation />
           <RandomHeroVideo />
           <LocationCollection />

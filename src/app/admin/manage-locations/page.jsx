@@ -2,6 +2,7 @@ import { LocationModel } from "@/app/utils/models/location"; // Check export, mi
 import DBConnection from "@/app/utils/config/db";
 import LocationManagerClient from "./LocationManagerClient";
 import AdminNavbar from "@/app/components/adminNavbar";
+import styles from "./LocationManager.module.css";
 
 export default async function ManageLocationsPage() {
     await DBConnection();
@@ -17,8 +18,8 @@ export default async function ManageLocationsPage() {
     return (
         <div>
             <AdminNavbar />
-            <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
-                <h1 style={{ marginBottom: '20px', fontSize: '2rem', fontWeight: 'bold' }}>Manage Locations</h1>
+            <div className={styles.pageContainer}>
+                <h1 className={styles.pageTitle}>Manage Locations</h1>
                 <LocationManagerClient initialLocations={serializedLocations} />
             </div>
         </div>

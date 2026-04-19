@@ -138,7 +138,7 @@
 .form textarea:focus {
     outline: none;
     border-color: #2563eb;
-    ring: 2px solid #93c5fd;
+    box-shadow: 0 0 0 2px #93c5fd;
 }
 
 .modalActions {
@@ -165,4 +165,21 @@
 .cancelBtn {
     background: #e5e7eb;
     color: #374151;
+}
+
+/* Utilities Additions */
+.pageContainer {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.pageTitle {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.coverImage {
+    object-fit: cover;
 }

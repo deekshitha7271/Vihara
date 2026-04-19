@@ -160,3 +160,62 @@
 .dailyTemp {
     font-weight: 700;
 }
+
+/* Utilities Additions */
+.loadingContainer {
+    height: 200px;
+}
+
+.ellipsis {
+    font-size: 1.2rem;
+}
+
+.currentIcon {
+    font-size: 1.5rem;
+}
+
+.currentText {
+    font-size: 0.85rem;
+}
+
+.fullForecastBtn {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 0.8rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-weight: 600;
+}
+
+.modalTitle {
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+}
+
+.dailyList {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.dailyIconWrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.dailyIcon {
+    font-size: 1.2rem;
+}
+
+.tempMax {
+    opacity: 1;
+}
+
+.tempMin {
+    opacity: 0.6;
+    margin-left: 8px;
+}

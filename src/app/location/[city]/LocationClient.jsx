@@ -9,7 +9,7 @@ import WeatherComponent from '../../components/WeatherComponent';
 // Dynamically import map to avoid SSR issues
 const MapComponent = dynamic(() => import('../../components/MapComponent'), {
     ssr: false,
-    loading: () => <div style={{ height: '100%', background: '#e0e0e0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading Map...</div>
+    loading: () => <div className={styles.mapLoading}>Loading Map...</div>
 });
 
 export default function LocationClient({ city, hotels }) {
@@ -52,7 +52,7 @@ export default function LocationClient({ city, hotels }) {
             <div className={styles.contentInner}>
 
                 {filteredHotels.length === 0 ? (
-                    <div style={{ textAlign: 'center', padding: '60px', color: '#666' }}>
+                    <div className={styles.noHotelsContainer}>
                         <h2>No properties found currently</h2>
                         <p>We are expanding our collection in {displayCity} soon.</p>
                     </div>
@@ -103,12 +103,11 @@ export default function LocationClient({ city, hotels }) {
                         {/* RIGHT: Sidebar (Map + Weather) */}
                         <div className={styles.sidebar}>
                             {/* Filter in Sidebar */}
-                            <div className={styles.selectWrapper} style={{ marginBottom: '20px', width: '100%' }}>
+                            <div className={`${styles.selectWrapper} ${styles.filterSelectContainer}`}>
                                 <select
-                                    className={styles.filterSelect}
+                                    className={`${styles.filterSelect} ${styles.w100}`}
                                     value={activeFilter}
                                     onChange={(e) => setActiveFilter(e.target.value)}
-                                    style={{ width: '100%' }}
                                 >
                                     <option value="All">All Categories</option>
                                     <option value="Resort">Resort</option>

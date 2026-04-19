@@ -153,9 +153,27 @@
   cursor: pointer;
 }
 .hostButton:hover {
-  
   color: #111;
 } 
+
+.logoutBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #ffffffd9;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar:hover .logoutBtn {
+  color: #111;
+}
+
+.logoutBtn:hover {
+  text-decoration: underline;
+}
 /* RESPONSIVE */
 @media (max-width: 1024px) {
   .navbar {

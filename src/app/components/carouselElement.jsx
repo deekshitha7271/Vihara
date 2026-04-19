@@ -1,4 +1,5 @@
-// 'use client'
+'use client'
+
 // import useEmblaCarousel from 'embla-carousel-react'
 // import Autoplay from 'embla-carousel-autoplay'
 // import Image from 'next/image'
@@ -214,11 +215,10 @@
 //   );
 // }
 
-'use client'
 
 import { useEffect, useState } from 'react'
 import styles from './Carousel.module.css' // ← module import
-
+import { Link } from "next/link"
 export default function RandomHeroVideo() {
   const VIDEOS = [
     "/entry.mp4",
@@ -228,7 +228,11 @@ export default function RandomHeroVideo() {
   ];
 
   const [videoSrc, setVideoSrc] = useState(null);
-
+  const onExplore = () => {
+    return (
+      <Link to="/LocationCollection.jsx"></Link>
+    )
+  }
   useEffect(() => {
     const random = VIDEOS[Math.floor(Math.random() * VIDEOS.length)];
     setVideoSrc(random);
@@ -257,7 +261,7 @@ export default function RandomHeroVideo() {
       <div className={styles.content}>
         <h1 className={styles.title}>Your Stay, Your Story</h1>
         <p className={styles.subtitle}>Experience luxury like never before.</p>
-        <button className={styles.button}>
+        <button className={styles.button} onClick={onExplore}>
           Explore Resorts →
         </button>
       </div>

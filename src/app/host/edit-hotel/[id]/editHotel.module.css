@@ -147,6 +147,188 @@
 }
 
 .rejected {
-    background: #ffebee;
     color: #c62828;
+}
+
+/* Edit Specific & Common Dynamic Elements */
+.loadingContainer {
+    padding: 40px;
+}
+
+.imagePreviewWrapper {
+    position: relative;
+    height: 300px;
+}
+
+.imagePreviewImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.imagePreviewChangeBtn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.uploadIconText {
+    font-weight: 600;
+}
+
+.uploadIconSubtext {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.galleryUploadContainer {
+    padding: 1rem;
+    border-style: dashed;
+}
+
+.galleryTextLabel {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.galleryPreviewsContainer {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    overflow-x: auto;
+}
+
+.galleryPreviewItem {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+}
+
+.galleryPreviewImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.galleryPreviewRemoveBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.amenitiesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.amenityChip {
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.amenityChipActive {
+    background: #000;
+    color: white;
+}
+
+.amenityChipInactive {
+    background: white;
+    color: #333;
+}
+
+.customInputWrapper {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.customAddBtn {
+    width: auto;
+    padding: 0 20px;
+}
+
+.addedTagsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.addedTagChipEdit {
+    background: #e0e0e0;
+    padding: 6px 12px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.addedTagChipRule {
+    background: #fff3e0;
+    border: 1px solid #ffcc80;
+    padding: 6px 12px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.removeTagBtn {
+    cursor: pointer;
+}
+
+.policiesSection {
+    margin-bottom: 32px;
+    border-top: 1px solid #eee;
+    padding-top: 24px;
+}
+
+.hiddenInput {
+    display: none;
+}
+
+.marginBottom32 {
+    margin-bottom: 32px;
+}
+
+.marginBottom24 {
+    margin-bottom: 24px;
+}
+
+.marginBottom10 {
+    margin-bottom: 10px;
+}
+
+/* Utilities Additions */
+.customAmenityLabel {
+    font-size: 0.9rem;
+    color: #666;
 }

@@ -11,7 +11,7 @@ import dynamic from 'next/dynamic';
 // Dynamic import for Map to avoid SSR issues with Leaflet
 const MapPicker = dynamic(() => import('@/app/components/MapPicker'), {
   ssr: false,
-  loading: () => <div style={{ height: '300px', background: '#f0f0f0', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading Map...</div>
+  loading: () => <div className={styles.mapLoading}>Loading Map...</div>
 });
 
 export default function HostOnboarding() {
@@ -101,8 +101,8 @@ export default function HostOnboarding() {
 
       {/* Right Panel - Form */}
       <div className={styles.rightPanel}>
-        <div className={styles.topBar} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <button className={styles.backBtn} style={{ textDecoration: 'none', border: '1px solid #ddd', padding: '8px 16px', borderRadius: '20px' }}>Save & Exit</button>
+        <div className={`${styles.topBar} ${styles.topBarAlignRight}`}>
+          <button className={`${styles.backBtn} ${styles.backBtnOutline}`}>Save & Exit</button>
         </div>
 
         <div className={styles.stepContainer}>
@@ -117,9 +117,9 @@ export default function HostOnboarding() {
             >
               {/* STEP 0: INTRO */}
               {step === 0 && (
-                <div style={{ textAlign: 'center' }}>
+                <div className={styles.textCenter}>
                   <h2 className={styles.stepTitle}>Join the community</h2>
-                  <p style={{ marginBottom: '2rem', color: '#666' }}>Earn money as a host on Vihara.</p>
+                  <p className={styles.introSubtitle}>Earn money as a host on Vihara.</p>
                   <div className={styles.grid}>
                     {/* Visual placeholders */}
                   </div>
@@ -149,7 +149,7 @@ export default function HostOnboarding() {
               {step === 2 && (
                 <div>
                   <h2 className={styles.stepTitle}>Where's your place located?</h2>
-                  <p style={{ marginBottom: '1rem', color: '#666' }}>Your address is only shared with guests after they make a reservation.</p>
+                  <p className={styles.locationSubtitle}>Your address is only shared with guests after they make a reservation.</p>
                   <input
                     className={styles.input}
                     placeholder="Enter your city"
@@ -157,7 +157,7 @@ export default function HostOnboarding() {
                     onChange={(e) => handleChange('city', e.target.value)}
                   />
                   {/* Live Map Integration */}
-                  <div style={{ marginTop: '20px' }}>
+                  <div className={styles.mapWrapper}>
                     <MapPicker city={data.city} />
                   </div>
                 </div>
@@ -186,7 +186,7 @@ export default function HostOnboarding() {
               {step === 4 && (
                 <div>
                   <h2 className={styles.stepTitle}>Check your details</h2>
-                  <div className={styles.card} style={{ alignItems: 'flex-start', background: '#f9f9f9' }}>
+                  <div className={`${styles.card} ${styles.reviewCard}`}>
                     <p><strong>Type:</strong> {data.propertyType}</p>
                     <p><strong>City:</strong> {data.city}</p>
                     <p><strong>Experience:</strong> {data.hostingExperience}</p>
@@ -202,10 +202,9 @@ export default function HostOnboarding() {
         {/* Footer Controls */}
         <div className={styles.controls}>
           <button
-            className={styles.backBtn}
             onClick={back}
             disabled={step === 0}
-            style={{ opacity: step === 0 ? 0 : 1 }}
+            className={`${styles.backBtn} ${step === 0 ? styles.hidden : ''}`}
           >
             Back
           </button>
@@ -225,10 +224,9 @@ export default function HostOnboarding() {
             </button>
           ) : (
             <button
-              className={styles.nextBtn}
               onClick={submit}
               disabled={loading}
-              style={{ background: 'rgb(3, 107, 90)' }}
+              className={`${styles.nextBtn} ${styles.submitBtnActive}`}
             >
               {loading ? 'Submitting...' : 'Submit Properties'}
             </button>

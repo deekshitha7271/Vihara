@@ -42,7 +42,7 @@ export default function LocationManagerClient({ initialLocations }) {
                                 src={loc.image}
                                 alt={loc.location}
                                 fill
-                                style={{ objectFit: 'cover' }}
+                                className={styles.coverImage}
                             />
                         </div>
                         <div className={styles.cardContent}>

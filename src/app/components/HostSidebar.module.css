@@ -81,3 +81,30 @@
     border: 1px solid #555;
     box-shadow: none;
 }
+
+/* Utilities Additions */
+.hostInfo {
+    flex: 1;
+}
+
+.hostName {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #eee;
+}
+
+.hostRole {
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+.logoutBtn {
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.logoutBtn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}

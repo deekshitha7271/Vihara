@@ -64,7 +64,7 @@ export default async function MyHotels() {
                         <h2>No properties listed yet</h2>
                         <p>Get started by adding your first hotel!</p>
                         <br />
-                        <a href="/host/add-hotel" style={{ color: 'rgb(72, 206, 184)', fontWeight: 600 }}>List a property now</a>
+                        <a href="/host/add-hotel" className={styles.listNowBtn}>List a property now</a>
                     </div>
                 ) : (
                     <div className={styles.grid}>
@@ -77,17 +77,7 @@ export default async function MyHotels() {
                                         alt={hotel.name}
                                         className={styles.hotelImage}
                                     />
-                                    <div style={{
-                                        position: 'absolute',
-                                        top: 10,
-                                        right: 10,
-                                        padding: '4px 12px',
-                                        borderRadius: '12px',
-                                        background: 'rgba(0,0,0,0.6)',
-                                        color: 'white',
-                                        fontSize: '0.8rem',
-                                        fontWeight: 600
-                                    }}>
+                                    <div className={styles.categoryBadge}>
                                         {hotel.category}
                                     </div>
                                 </div>
@@ -97,16 +87,11 @@ export default async function MyHotels() {
                                         <MapPin size={16} /> {hotel.location}
                                     </div>
                                     <div className={styles.footer}>
-                                        <span className={styles.price}>₹{hotel.price}<span style={{ fontSize: '0.8rem', fontWeight: 400, color: '#666' }}>/night</span></span>
+                                        <span className={styles.price}>₹{hotel.price}<span className={styles.nightText}>/night</span></span>
                                         <span className={`${styles.status} ${styles[hotel.status.toLowerCase()]}`}>
                                             {hotel.status}
                                         </span>
-                                        <a href={`/host/edit-hotel/${hotel._id}`} style={{
-                                            display: 'inline-flex', alignItems: 'center', gap: 4,
-                                            background: '#f0f0f0', padding: '4px 12px', borderRadius: '16px',
-                                            textDecoration: 'none', color: '#333', fontSize: '0.85rem', fontWeight: 600,
-                                            marginLeft: 'auto'
-                                        }}>
+                                        <a href={`/host/edit-hotel/${hotel._id}`} className={styles.editLink}>
                                             ✏️ Edit
                                         </a>
                                     </div>

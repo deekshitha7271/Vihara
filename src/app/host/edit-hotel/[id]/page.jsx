@@ -8,13 +8,6 @@ import { updateHotelAction } from "@/app/serverActions/hotelActions";
 import { useRouter } from "next/navigation";
 
 export default function EditHotel({ params }) {
-    // Ungroup params using React.use() or await if async, but this is a client component
-    // In Next.js 15, params is a promise even in client components if passed from layout?
-    // Actually, in default Client Components it's prop. 
-    // Let's assume standard Next.js behavior. If it fails we fix.
-    // Safe way: `const { id } = use(params);` if React 19/Next 15, or just `params.id` if older.
-    // Given the context `export default async function HotelDetailPage({ params })` in another file used `await params`, 
-    // it suggests we might need to handle it as a promise.
     const resolvedParams = use(params);
     const id = resolvedParams.id;
     const router = useRouter();
@@ -178,7 +171,7 @@ export default function EditHotel({ params }) {
         }
     };
 
-    if (loading) return <div className={styles.container}><p style={{ padding: 40 }}>Loading...</p></div>;
+    if (loading) return <div className={styles.container}><p className={styles.loadingContainer}>Loading...</p></div>;
 
     return (
         <div className={styles.container}>
@@ -191,17 +184,15 @@ export default function EditHotel({ params }) {
                     </div>
 
                     <form onSubmit={submitHandler}>
-                        {/* Image Upload */}
-                        <div style={{ marginBottom: '32px' }}>
+                        <div className={styles.marginBottom32}>
                             <label className={styles.label}>Property Image</label>
                             <div
-                                className={styles.fileUpload}
+                                className={`${styles.fileUpload} ${imagePreview ? styles.imagePreviewWrapper : ''}`}
                                 onClick={() => document.getElementById('fileInput').click()}
-                                style={imagePreview ? { padding: 0, overflow: 'hidden', border: 'none' } : {}}
                             >
                                 {imagePreview ? (
-                                    <div style={{ position: 'relative', height: '300px' }}>
-                                        <img src={imagePreview} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                    <div className={styles.imagePreviewWrapper}>
+                                        <img src={imagePreview} alt="Preview" className={styles.imagePreviewImg} />
                                         <button
                                             type="button"
                                             onClick={(e) => {
@@ -210,12 +201,7 @@ export default function EditHotel({ params }) {
                                                 // So let's just allow replacing.
                                                 document.getElementById('fileInput').click();
                                             }}
-                                            style={{
-                                                position: 'absolute', bottom: 10, right: 10,
-                                                background: 'white', border: 'none',
-                                                borderRadius: '20px', padding: '8px 16px', cursor: 'pointer',
-                                                fontWeight: 'bold', boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
-                                            }}
+                                            className={styles.imagePreviewChangeBtn}
                                         >
                                             Change Image
                                         </button>
@@ -223,7 +209,7 @@ export default function EditHotel({ params }) {
                                 ) : (
                                     <div>
                                         <Upload size={40} className={styles.uploadIcon} />
-                                        <p style={{ fontWeight: 600 }}>Click to upload cover image</p>
+                                        <p className={styles.uploadIconText}>Click to upload cover image</p>
                                     </div>
                                 )}
                                 <input
@@ -231,7 +217,7 @@ export default function EditHotel({ params }) {
                                     type="file"
                                     accept="image/*"
                                     onChange={handleImageChange}
-                                    style={{ display: 'none' }}
+                                    className={styles.hiddenInput}
                                 />
                             </div>
                         </div>
@@ -281,59 +267,56 @@ export default function EditHotel({ params }) {
                             </div>
                         </div>
 
-                        <div style={{ marginBottom: '24px' }}>
+                        <div className={styles.marginBottom24}>
                             <label className={styles.label}>Short Description</label>
                             <input className={styles.input} value={shortDescription} onChange={(e) => setShortDescription(e.target.value)} />
                         </div>
 
-                        <div style={{ marginBottom: '24px' }}>
+                        <div className={styles.marginBottom24}>
                             <label className={styles.label}>Description</label>
                             <textarea className={styles.textarea} required value={description} onChange={(e) => setDescription(e.target.value)} />
                         </div>
 
-                        {/* Gallery */}
-                        <div style={{ marginBottom: '32px' }}>
+                        <div className={styles.marginBottom32}>
                             <label className={styles.label}>Gallery Images</label>
 
                             {/* Existing Images */}
                             {existingGallery.length > 0 && (
-                                <div style={{ marginBottom: 10 }}>
-                                    <p style={{ fontSize: '0.9rem', marginBottom: 5 }}>Current Images:</p>
-                                    <div style={{ display: 'flex', gap: '10px', overflowX: 'auto' }}>
+                                <div className={styles.marginBottom10}>
+                                    <p className={styles.galleryTextLabel}>Current Images:</p>
+                                    <div className={styles.galleryPreviewsContainer}>
                                         {existingGallery.map((src, i) => (
-                                            <div key={i} style={{ position: 'relative', width: '100px', height: '100px', flexShrink: 0 }}>
-                                                <img src={src} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }} />
-                                                <button type="button" onClick={() => removeExistingGalleryImage(i)} style={{ position: 'absolute', top: 0, right: 0, background: 'red', color: 'white', border: 'none', borderRadius: '50%', width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>×</button>
+                                            <div key={i} className={styles.galleryPreviewItem}>
+                                                <img src={src} className={styles.galleryPreviewImg} />
+                                                <button type="button" onClick={() => removeExistingGalleryImage(i)} className={styles.galleryPreviewRemoveBtn}>×</button>
                                             </div>
                                         ))}
                                     </div>
                                 </div>
                             )}
 
-                            <div className={styles.fileUpload} onClick={() => document.getElementById('galleryInput').click()} style={{ padding: '1rem', borderStyle: 'dashed' }}>
+                            <div className={`${styles.fileUpload} ${styles.galleryUploadContainer}`} onClick={() => document.getElementById('galleryInput').click()}>
                                 <Upload size={24} className={styles.uploadIcon} />
-                                <p style={{ fontWeight: 600 }}>Add more photos</p>
-                                <input id="galleryInput" type="file" multiple accept="image/*" onChange={handleGalleryChange} style={{ display: 'none' }} />
+                                <p className={styles.uploadIconText}>Add more photos</p>
+                                <input id="galleryInput" type="file" multiple accept="image/*" onChange={handleGalleryChange} className={styles.hiddenInput} />
                             </div>
 
                             {newGalleryFiles.length > 0 && (
-                                <div style={{ display: 'flex', gap: '10px', marginTop: '10px', overflowX: 'auto' }}>
+                                <div className={styles.galleryPreviewsContainer}>
                                     {newGalleryPreviews.map((src, i) => (
-                                        <div key={i} style={{ position: 'relative', width: '100px', height: '100px', flexShrink: 0 }}>
-                                            <img src={src} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }} />
-                                            <button type="button" onClick={() => removeNewGalleryImage(i)} style={{ position: 'absolute', top: 0, right: 0, background: 'red', color: 'white', border: 'none', borderRadius: '50%', width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>×</button>
+                                        <div key={i} className={styles.galleryPreviewItem}>
+                                            <img src={src} className={styles.galleryPreviewImg} />
+                                            <button type="button" onClick={() => removeNewGalleryImage(i)} className={styles.galleryPreviewRemoveBtn}>×</button>
                                         </div>
                                     ))}
                                 </div>
                             )}
                         </div>
 
-                        {/* Custom Amenities */}
-                        <div style={{ marginBottom: '24px' }}>
+                        <div className={styles.marginBottom24}>
                             <label className={styles.label}>Amenities</label>
 
-                            {/* Predefined Chips */}
-                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '16px' }}>
+                            <div className={styles.amenitiesContainer}>
                                 {['Wifi', 'Pool', 'AC', 'Parking', 'Kitchen', 'TV', 'Gym', 'Spa'].map(opt => (
                                     <button
                                         key={opt}
@@ -345,20 +328,7 @@ export default function EditHotel({ params }) {
                                                 setAmenities([...amenities, opt]);
                                             }
                                         }}
-                                        style={{
-                                            padding: '8px 16px',
-                                            borderRadius: '20px',
-                                            border: '1px solid #ddd',
-                                            background: amenities.includes(opt) ? '#000' : 'white',
-                                            color: amenities.includes(opt) ? 'white' : '#333',
-                                            cursor: 'pointer',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            gap: '6px',
-                                            fontSize: '0.9rem',
-                                            fontWeight: 500,
-                                            transition: 'all 0.2s'
-                                        }}
+                                        className={`${styles.amenityChip} ${amenities.includes(opt) ? styles.amenityChipActive : styles.amenityChipInactive}`}
                                     >
                                         {amenities.includes(opt) ? <X size={14} /> : <Plus size={14} />}
                                         {opt}
@@ -366,25 +336,24 @@ export default function EditHotel({ params }) {
                                 ))}
                             </div>
 
-                            <label className={styles.label} style={{ fontSize: '0.9rem', color: '#666' }}>Add Custom Amenity</label>
-                            <div style={{ display: 'flex', gap: '10px', marginBottom: '12px' }}>
+                            <label className={`${styles.label} ${styles.customAmenityLabel}`}>Add Custom Amenity</label>
+                            <div className={styles.customInputWrapper}>
                                 <input className={styles.input} placeholder="Add amenity" value={customAmenityInput} onChange={(e) => setCustomAmenityInput(e.target.value)} onKeyDown={(e) => {
                                     if (e.key === 'Enter') { e.preventDefault(); if (customAmenityInput.trim()) { setAmenities([...amenities, customAmenityInput.trim()]); setCustomAmenityInput(""); } }
                                 }} />
-                                <button type="button" className={styles.submitBtn} style={{ width: 'auto', padding: '0 20px' }} onClick={() => { if (customAmenityInput.trim()) { setAmenities([...amenities, customAmenityInput.trim()]); setCustomAmenityInput(""); } }}>Add</button>
+                                <button type="button" className={`${styles.submitBtn} ${styles.customAddBtn}`} onClick={() => { if (customAmenityInput.trim()) { setAmenities([...amenities, customAmenityInput.trim()]); setCustomAmenityInput(""); } }}>Add</button>
                             </div>
-                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                            <div className={styles.addedTagsContainer}>
                                 {amenities.filter(item => !['Wifi', 'Pool', 'AC', 'Parking', 'Kitchen', 'TV', 'Gym', 'Spa'].includes(item)).map((item, index) => (
-                                    <span key={index} style={{ background: '#e0e0e0', padding: '6px 12px', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                    <span key={index} className={styles.addedTagChipEdit}>
                                         {item}
-                                        <X size={14} style={{ cursor: 'pointer' }} onClick={() => setAmenities(amenities.filter((_, i) => i !== index))} />
+                                        <X size={14} className={styles.removeTagBtn} onClick={() => setAmenities(amenities.filter((_, i) => i !== index))} />
                                     </span>
                                 ))}
                             </div>
                         </div>
 
-                        {/* Policies */}
-                        <div style={{ marginBottom: '32px', borderTop: '1px solid #eee', paddingTop: '24px' }}>
+                        <div className={styles.policiesSection}>
                             <h3 className={styles.label}>Property Policies</h3>
                             <div className={styles.grid}>
                                 <div><label className={styles.label}>Check-in Time</label><input type="time" className={styles.input} value={checkInTime} onChange={(e) => setCheckInTime(e.target.value)} /></div>
@@ -392,17 +361,17 @@ export default function EditHotel({ params }) {
                             </div>
 
                             <label className={styles.label}>House Rules</label>
-                            <div style={{ display: 'flex', gap: '10px', marginBottom: '12px' }}>
+                            <div className={styles.customInputWrapper}>
                                 <input className={styles.input} placeholder="Add rule" value={customHouseRuleInput} onChange={(e) => setCustomHouseRuleInput(e.target.value)} onKeyDown={(e) => {
                                     if (e.key === 'Enter') { e.preventDefault(); if (customHouseRuleInput.trim()) { setHouseRules([...houseRules, customHouseRuleInput.trim()]); setCustomHouseRuleInput(""); } }
                                 }} />
-                                <button type="button" className={styles.submitBtn} style={{ width: 'auto', padding: '0 20px' }} onClick={() => { if (customHouseRuleInput.trim()) { setHouseRules([...houseRules, customHouseRuleInput.trim()]); setCustomHouseRuleInput(""); } }}>Add</button>
+                                <button type="button" className={`${styles.submitBtn} ${styles.customAddBtn}`} onClick={() => { if (customHouseRuleInput.trim()) { setHouseRules([...houseRules, customHouseRuleInput.trim()]); setCustomHouseRuleInput(""); } }}>Add</button>
                             </div>
-                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                            <div className={styles.addedTagsContainer}>
                                 {houseRules.map((item, index) => (
-                                    <span key={index} style={{ background: '#fff3e0', border: '1px solid #ffcc80', padding: '6px 12px', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                    <span key={index} className={styles.addedTagChipRule}>
                                         {item}
-                                        <X size={14} style={{ cursor: 'pointer' }} onClick={() => setHouseRules(houseRules.filter((_, i) => i !== index))} />
+                                        <X size={14} className={styles.removeTagBtn} onClick={() => setHouseRules(houseRules.filter((_, i) => i !== index))} />
                                     </span>
                                 ))}
                             </div>

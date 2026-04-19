@@ -1,9 +1,58 @@
 /* Layout */
+/* Detail Page Utility Classes */
+.notFound {
+    padding: 40px;
+    text-align: center;
+}
+
+.coverImage {
+    object-fit: cover;
+}
+
+.locationText {
+    margin-top: 16px;
+}
+
+.descriptionText {
+    color: #6a6a6a;
+    font-size: 14px;
+}
+
+.flex1 {
+    flex: 1;
+}
+
+.relativeFull {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.textAlignLeft {
+    text-align: left;
+}
+
+.divider {
+    height: 1px;
+    background: #ddd;
+    margin: 8px 0;
+}
+
+.paddingTop0 {
+    padding-top: 0;
+}
+
+.shieldIcon {
+    min-width: 24px;
+    margin-top: 4px;
+}
+
 .container {
     max-width: 1120px;
     margin: 0 auto;
     padding: 24px 80px;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter',
+        sans-serif;
     color: #222;
 }
 
@@ -695,4 +744,245 @@
         transform: translateY(0);
         opacity: 1;
     }
+}
+
+/* Booking Sidebar Custom CSS Classes */
+.bookingSidebarWrapper {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(245, 245, 250, 0.8));
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), inset 0 2px 4px rgba(255, 255, 255, 0.4);
+    position: sticky;
+    top: 100px;
+    font-family: 'Inter', sans-serif;
+    color: #1a1a1a;
+}
+
+.bookingSidebarHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 28px;
+}
+
+.bookingSidebarPrice {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.bookingSidebarNight {
+    font-size: 16px;
+    font-weight: 500;
+    color: #666;
+    margin-left: 6px;
+}
+
+.bookingSidebarControls {
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    margin-bottom: 24px;
+    overflow: hidden;
+}
+
+.bookingSidebarDateRow {
+    display: flex;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    transition: background 0.2s;
+}
+
+.bookingSidebarDateRow:hover {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.bookingSidebarDateCol {
+    flex: 1;
+    padding: 14px 16px;
+}
+
+.bookingSidebarDateCol:first-child {
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.bookingSidebarLabel {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    color: #888;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.bookingSidebarValue {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.bookingSidebarCalendarWrapper {
+    overflow: hidden;
+    background: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.bookingSidebarGuestsRow {
+    padding: 14px 16px;
+}
+
+.bookingSidebarGuestsFlex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bookingSidebarGuestControls {
+    display: flex;
+    gap: 8px;
+}
+
+.bookingSidebarGuestBtn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    color: #666;
+}
+
+.bookingSidebarGuestBtn:hover {
+    border-color: #222;
+    color: #222;
+}
+
+.bookingSidebarReserveBtn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #111 0%, #333 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.bookingSidebarReserveBtn:disabled {
+    cursor: not-allowed;
+}
+
+.bookingSidebarLoader {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spinButton 1s linear infinite;
+}
+
+@keyframes spinButton {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.bookingSidebarChargeText {
+    text-align: center;
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 24px;
+}
+
+.bookingSidebarCostDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.bookingSidebarCostRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    color: #444;
+}
+
+.bookingSidebarCostLabel {
+    text-decoration: underline;
+    text-decoration-color: #ccc;
+}
+
+.bookingSidebarTotalRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: 700;
+    color: #111;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    margin-top: 20px;
+}
+
+/* Toast Classes */
+.toastWrapper {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    padding: 16px 24px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 9999;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.toastSuccess {
+    background: #111;
+    color: #fff;
+    border: none;
+}
+
+.toastError {
+    background: #fff;
+    color: #d32f2f;
+    border: 1px solid #ffcdd2;
+}
+
+.toastIconSuccess {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.toastIconError {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #ffebee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d32f2f;
 }

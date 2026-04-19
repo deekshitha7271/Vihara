@@ -158,3 +158,176 @@
     background: #ccc;
     box-shadow: none;
 }
+
+/* Common Form Dynamic Elements */
+
+.imagePreviewWrapper {
+    position: relative;
+    height: 300px;
+}
+
+.imagePreviewImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.imagePreviewRemoveBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.uploadIconText {
+    font-weight: 600;
+}
+
+.uploadIconSubtext {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.coordinateInfo {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: -12px;
+    margin-bottom: 24px;
+}
+
+.galleryUploadContainer {
+    padding: 2rem;
+    border-style: dashed;
+}
+
+.galleryPreviewsContainer {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    overflow-x: auto;
+}
+
+.galleryPreviewItem {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+}
+
+.galleryPreviewImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.galleryPreviewRemoveBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.amenitiesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.amenityChip {
+    padding: 6px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    border: none;
+}
+
+.amenityChipActive {
+    background: #333;
+    color: #fff;
+}
+
+.amenityChipInactive {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.customInputWrapper {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.customAddBtn {
+    width: auto;
+    padding: 0 20px;
+}
+
+.addedTagsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.addedTagChip {
+    background: #fff3e0;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid #ffcc80;
+}
+
+.removeTagBtn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-weight: bold;
+    color: #666;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.policiesSection {
+    margin-bottom: 32px;
+    border-top: 1px solid #eee;
+    padding-top: 24px;
+}
+
+.policiesTitle {
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+}
+
+.houseRulesContainer {
+    margin-top: 24px;
+}
+
+.marginBottom32 {
+    margin-bottom: 32px;
+}
+
+.marginBottom24 {
+    margin-bottom: 24px;
+}
+
+.marginTop24 {
+    margin-top: 24px;
+}

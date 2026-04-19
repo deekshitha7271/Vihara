@@ -234,3 +234,42 @@
 .pendingCard p {
     color: #666;
 }
+
+/* Utilities Additions */
+.pendingTitle {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 800;
+    color: #1a1a1a;
+}
+
+.pendingText {
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.returnHomeBtn {
+    color: rgb(3, 107, 90);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 2px solid rgb(3, 107, 90);
+    padding-bottom: 2px;
+}
+
+.statPercentage {
+    color: #666;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.actionTitle {
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.actionDesc {
+    color: #666;
+    font-size: 0.9rem;
+}

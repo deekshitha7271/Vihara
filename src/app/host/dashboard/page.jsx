@@ -26,18 +26,12 @@ export default async function HostDasboard() {
                     <div className={styles.pendingIcon}>
                         <Clock size={40} />
                     </div>
-                    <h1 style={{ fontSize: '2rem', marginBottom: '1rem', fontWeight: 800, color: '#1a1a1a' }}>Application Pending</h1>
-                    <p style={{ color: '#666', fontSize: '1.1rem', lineHeight: 1.6, marginBottom: '2rem' }}>
+                    <h1 className={styles.pendingTitle}>Application Pending</h1>
+                    <p className={styles.pendingText}>
                         Thanks for applying to become a Vihara Host, <strong>{session.user.username}</strong>! <br />
                         We are currently reviewing your application. You will be notified once approved.
                     </p>
-                    <a href="/" style={{
-                        color: 'rgb(3, 107, 90)',
-                        textDecoration: 'none',
-                        fontWeight: 600,
-                        borderBottom: '2px solid rgb(3, 107, 90)',
-                        paddingBottom: '2px'
-                    }}>
+                    <a href="/" className={styles.returnHomeBtn}>
                         Return to Home
                     </a>
                 </div>
@@ -70,7 +64,7 @@ export default async function HostDasboard() {
                             <div className={styles.statIcon}>
                                 <TrendingUp size={24} />
                             </div>
-                            <span style={{ color: '#666', fontWeight: 600, fontSize: '0.85rem' }}>+12%</span>
+                            <span className={styles.statPercentage}>+12%</span>
                         </div>
                         <div className={styles.statValue}>₹0.00</div>
                         <div className={styles.statLabel}>Total Earnings</div>
@@ -105,8 +99,8 @@ export default async function HostDasboard() {
                             <Plus size={28} />
                         </div>
                         <div>
-                            <h3 style={{ fontWeight: 700, marginBottom: '4px' }}>List a new property</h3>
-                            <p style={{ color: '#666', fontSize: '0.9rem' }}>Start earning by adding a new hotel or stay.</p>
+                            <h3 className={styles.actionTitle}>List a new property</h3>
+                            <p className={styles.actionDesc}>Start earning by adding a new hotel or stay.</p>
                         </div>
                     </a>
 
@@ -115,8 +109,8 @@ export default async function HostDasboard() {
                             <Building2 size={28} />
                         </div>
                         <div>
-                            <h3 style={{ fontWeight: 700, marginBottom: '4px' }}>Manage Properties</h3>
-                            <p style={{ color: '#666', fontSize: '0.9rem' }}>View and edit your existing listings.</p>
+                            <h3 className={styles.actionTitle}>Manage Properties</h3>
+                            <p className={styles.actionDesc}>View and edit your existing listings.</p>
                         </div>
                     </a>
                 </div>

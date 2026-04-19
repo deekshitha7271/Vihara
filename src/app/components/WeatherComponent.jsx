@@ -63,7 +63,7 @@ export default function WeatherComponent({ lat, lng, city }) {
         fetchWeather();
     }, [lat, lng]);
 
-    if (loading) return <div className={styles.weatherWidget} style={{ height: '200px' }}></div>;
+    if (loading) return <div className={`${styles.weatherWidget} ${styles.loadingContainer}`}></div>;
     if (!current) return null;
 
     const getWeatherIcon = (code) => {
@@ -91,14 +91,14 @@ export default function WeatherComponent({ lat, lng, city }) {
                     <div className={styles.location}>
                         📍 {city}
                     </div>
-                    <div style={{ fontSize: '1.2rem' }}>...</div>
+                    <div className={styles.ellipsis}>...</div>
                 </div>
 
                 <div className={styles.mainTemp}>
                     <div className={styles.bigTemp}>{Math.round(current.temperature)}°</div>
                     <div className={styles.condition}>
-                        <span style={{ fontSize: '1.5rem' }}>{getWeatherIcon(current.weathercode)}</span>
-                        <span style={{ fontSize: '0.85rem' }}>Current</span>
+                        <span className={styles.currentIcon}>{getWeatherIcon(current.weathercode)}</span>
+                        <span className={styles.currentText}>Current</span>
                     </div>
                 </div>
 
@@ -114,17 +114,7 @@ export default function WeatherComponent({ lat, lng, city }) {
 
                 <div
                     onClick={() => setShowModal(true)}
-                    style={{
-                        textAlign: 'center',
-                        marginTop: '16px',
-                        fontSize: '0.8rem',
-                        background: 'rgba(255,255,255,0.2)',
-                        padding: '8px',
-                        borderRadius: '12px',
-                        cursor: 'pointer',
-                        transition: 'background 0.2s',
-                        fontWeight: '600'
-                    }}
+                    className={styles.fullForecastBtn}
                 >
                     See full forecast
                 </div>
@@ -135,17 +125,17 @@ export default function WeatherComponent({ lat, lng, city }) {
                 <div className={styles.modalBackdrop} onClick={() => setShowModal(false)}>
                     <div className={styles.modalContent} onClick={e => e.stopPropagation()}>
                         <button className={styles.closeButton} onClick={() => setShowModal(false)}>×</button>
-                        <h2 style={{ fontSize: '1.5rem', marginBottom: '24px' }}>7-Day Forecast</h2>
+                        <h2 className={styles.modalTitle}>7-Day Forecast</h2>
 
-                        <div style={{ maxHeight: '60vh', overflowY: 'auto', paddingRight: '8px' }}>
+                        <div className={styles.dailyList}>
                             {daily.map((day, idx) => (
                                 <div key={idx} className={styles.dailyRow}>
                                     <span className={styles.dayName}>{idx === 0 ? 'Today' : getDayName(day.time)}</span>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                                        <span style={{ fontSize: '1.2rem' }}>{getWeatherIcon(day.code)}</span>
+                                    <div className={styles.dailyIconWrapper}>
+                                        <span className={styles.dailyIcon}>{getWeatherIcon(day.code)}</span>
                                         <div className={styles.dailyTemp}>
-                                            <span style={{ opacity: 1 }}>{Math.round(day.max)}°</span>
-                                            <span style={{ opacity: 0.6, marginLeft: '8px' }}>{Math.round(day.min)}°</span>
+                                            <span className={styles.tempMax}>{Math.round(day.max)}°</span>
+                                            <span className={styles.tempMin}>{Math.round(day.min)}°</span>
                                         </div>
                                     </div>
                                 </div>

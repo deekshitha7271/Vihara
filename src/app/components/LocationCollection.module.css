@@ -268,3 +268,9 @@
   background: #e6e6e6;
   color: #121212;
 }
+
+/* Utilities Additions */
+.coverFullImg {
+  object-fit: cover !important;
+  object-position: center !important;
+}

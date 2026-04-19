@@ -32,7 +32,7 @@ export default function MapComponent({ hotels }) {
             key={JSON.stringify(mapCenter)}
             center={mapCenter}
             zoom={10}
-            style={{ height: "100%", width: "100%", borderRadius: "20px" }}
+            className="mapComponentContainer"
             scrollWheelZoom={false}
         >
             <TileLayer
@@ -46,27 +46,20 @@ export default function MapComponent({ hotels }) {
                     icon={icon}
                 >
                     <Popup>
-                        <div style={{ width: '200px', padding: '0px' }}>
+                        <div className="mapPopupContainer">
                             <img
                                 src={hotel.image || '/bg-resort-2.jpeg'}
                                 alt={hotel.name}
-                                style={{
-                                    width: '100%',
-                                    height: '100px',
-                                    objectFit: 'cover',
-                                    borderRadius: '8px 8px 0 0',
-                                    marginBottom: '8px',
-                                    display: 'block'
-                                }}
+                                className="mapPopupImg"
                                 onError={(e) => {
                                     e.currentTarget.style.display = 'none';
                                     e.currentTarget.src = '/bg-resort-2.jpeg';
                                     e.currentTarget.style.display = 'block';
                                 }}
                             />
-                            <div style={{ padding: '0 4px 4px' }}>
-                                <strong style={{ fontSize: '1rem', display: 'block', marginBottom: '4px' }}>{hotel.name}</strong>
-                                <span style={{ color: '#036b5a', fontWeight: 'bold' }}>₹{hotel.price}</span> / night
+                            <div className="mapPopupDetails">
+                                <strong className="mapPopupTitle">{hotel.name}</strong>
+                                <span className="mapPopupPrice">₹{hotel.price}</span> / night
                             </div>
                         </div>
                     </Popup>

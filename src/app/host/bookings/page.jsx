@@ -88,8 +88,8 @@ export default async function Bookings() {
                                     </div>
 
                                     {/* Price & Status */}
-                                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                        <span style={{ fontWeight: 700, fontSize: '1.1rem', marginBottom: '8px' }}>${booking.totalPrice}</span>
+                                    <div className={styles.priceStatusContainer}>
+                                        <span className={styles.priceValue}>${booking.totalPrice}</span>
                                         <span className={`${styles.status} ${styles[booking.status.toLowerCase()]}`}>
                                             {booking.status}
                                         </span>

@@ -63,13 +63,13 @@ export default function HostSidebar({ username }) {
                 <div className={styles.avatar}>
                     {username ? username[0].toUpperCase() : 'H'}
                 </div>
-                <div style={{ flex: 1 }}>
-                    <p style={{ fontWeight: 700, fontSize: '0.9rem', color: '#eee' }}>{username || 'Host'}</p>
-                    <p style={{ fontSize: '0.8rem', color: '#aaa' }}>Host Account</p>
+                <div className={styles.hostInfo}>
+                    <p className={styles.hostName}>{username || 'Host'}</p>
+                    <p className={styles.hostRole}>Host Account</p>
                 </div>
                 <div
                     onClick={() => logoutAction()}
-                    style={{ cursor: 'pointer', padding: '8px', borderRadius: '50%', transition: 'background 0.2s' }}
+                    className={styles.logoutBtn}
                     title="Logout"
                 >
                     <LogOut size={20} color="#d32f2f" />

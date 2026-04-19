@@ -4,46 +4,29 @@ import { useState } from "react";
 import Image from "next/image";
 import styles from "../admin.module.css";
 import { updateHotelStatusAction } from "@/app/serverActions/adminActions";
-import Swal from "sweetalert2";
 
 export default function PendingHotelsClient({ hotels }) {
     const [pendingHotels, setPendingHotels] = useState(hotels);
 
     const updateStatus = async (hotelId, status) => {
         try {
-            const result = await Swal.fire({
-                title: `Are you sure?`,
-                text: `Do you want to ${status.toLowerCase()} this property?`,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: status === 'APPROVED' ? '#28a745' : '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: `Yes, ${status.toLowerCase()} it!`
-            });
+            const isConfirmed = window.confirm(`Are you sure you want to ${status.toLowerCase()} this property?`);
 
-            if (result.isConfirmed) {
+            if (isConfirmed) {
                 const actionResult = await updateHotelStatusAction(hotelId, status);
 
                 if (actionResult.success) {
-                    Swal.fire(
-                        'Success!',
-                        actionResult.message,
-                        'success'
-                    );
+                    alert(`${status} successfully!`);
                     setPendingHotels((prev) =>
                         prev.filter((hotel) => hotel._id !== hotelId)
                     );
                 } else {
-                    Swal.fire(
-                        'Error!',
-                        actionResult.message,
-                        'error'
-                    );
+                    alert(`Error: ${actionResult.message}`);
                 }
             }
         } catch (e) {
             console.error(e);
-            Swal.fire('Error', 'An unexpected error occurred', 'error');
+            alert('An unexpected error occurred');
         }
     };
 
@@ -66,7 +49,6 @@ export default function PendingHotelsClient({ hotels }) {
                                     src={hotel.image}
                                     alt={hotel.name}
                                     fill
-                                    style={{ objectFit: "cover" }}
                                     className={styles.image}
                                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                 />

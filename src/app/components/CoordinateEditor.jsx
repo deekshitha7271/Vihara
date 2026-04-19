@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { updateLocationAction } from '@/app/serverActions/locationActions';
+import styles from './CoordinateEditor.module.css';
 
 export default function CoordinateEditor({ hotelId, currentLat, currentLng, onUpdate }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -40,21 +41,9 @@ export default function CoordinateEditor({ hotelId, currentLat, currentLng, onUp
                     e.stopPropagation();
                     setIsOpen(true);
                 }}
-                style={{
-                    padding: '6px 12px',
-                    fontSize: '0.75rem',
-                    background: '#f0f0f0',
-                    border: '1px solid #ddd',
-                    borderRadius: '20px',
-                    cursor: 'pointer',
-                    color: '#555',
-                    marginTop: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px'
-                }}
+                className={styles.editorButton}
             >
-                📍 Set Real Location
+                 Set Real Location
             </button>
         );
     }
@@ -62,23 +51,17 @@ export default function CoordinateEditor({ hotelId, currentLat, currentLng, onUp
     return (
         <div
             onClick={(e) => e.stopPropagation()} // Prevent card navigation
-            style={{
-                marginTop: '10px',
-                padding: '16px',
-                background: '#fafafa',
-                border: '1px solid #eee',
-                borderRadius: '12px'
-            }}
+            className={styles.editorContainer}
         >
-            <h4 style={{ margin: '0 0 10px 0', fontSize: '0.9rem' }}>Edit Coordinates</h4>
-            <div style={{ display: 'flex', gap: '8px', marginBottom: '10px' }}>
+            <h4 className={styles.editorTitle}>Edit Coordinates</h4>
+            <div className={styles.inputRow}>
                 <input
                     type="number"
                     step="any"
                     placeholder="Latitude"
                     value={lat}
                     onChange={e => setLat(e.target.value)}
-                    style={{ padding: '8px', borderRadius: '6px', border: '1px solid #ccc', width: '100px' }}
+                    className={styles.inputField}
                 />
                 <input
                     type="number"
@@ -86,22 +69,14 @@ export default function CoordinateEditor({ hotelId, currentLat, currentLng, onUp
                     placeholder="Longitude"
                     value={lng}
                     onChange={e => setLng(e.target.value)}
-                    style={{ padding: '8px', borderRadius: '6px', border: '1px solid #ccc', width: '100px' }}
+                    className={styles.inputField}
                 />
             </div>
-            <div style={{ display: 'flex', gap: '8px' }}>
+            <div className={styles.actionRow}>
                 <button
                     onClick={handleSave}
                     disabled={loading}
-                    style={{
-                        padding: '6px 12px',
-                        background: '#036b5a',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '6px',
-                        fontSize: '0.85rem',
-                        cursor: 'pointer'
-                    }}
+                    className={styles.saveBtn}
                 >
                     {loading ? 'Saving...' : 'Save'}
                 </button>
@@ -110,20 +85,12 @@ export default function CoordinateEditor({ hotelId, currentLat, currentLng, onUp
                         e.preventDefault();
                         setIsOpen(false);
                     }}
-                    style={{
-                        padding: '6px 12px',
-                        background: 'transparent',
-                        color: '#666',
-                        border: '1px solid #ccc',
-                        borderRadius: '6px',
-                        fontSize: '0.85rem',
-                        cursor: 'pointer'
-                    }}
+                    className={styles.cancelBtn}
                 >
                     Cancel
                 </button>
             </div>
-            <p style={{ fontSize: '0.75rem', color: '#999', marginTop: '8px' }}>
+            <p className={styles.tipText}>
                 Tip: Google Maps {'>'} Right Click {'>'} Copy coordinates
             </p>
         </div>

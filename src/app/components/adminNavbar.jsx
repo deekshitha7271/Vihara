@@ -9,7 +9,7 @@ const AdminNavbar = () => {
         </Link>
       </div>
 
-      <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+      <div className="navLinksContainer">
         <Link href="/admin/Approve-host-property" className="link">
           Approve Properties
         </Link>
@@ -18,7 +18,7 @@ const AdminNavbar = () => {
         </Link>
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+      <div className="adminProfileContainer">
         <p>Welcome: Admin</p>
         <Link href="/api/auth/signout" className='link'>
           <div className="logout">

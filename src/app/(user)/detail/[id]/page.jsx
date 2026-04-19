@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Star, Share, Heart, MapPin, ShieldCheck, Wifi, Coffee, Utensils, Award, Grid } from "lucide-react";
 import MapWrapper from "./MapWrapper";
 import ThingsToKnow from "./ThingsToKnow";
+import BookingSidebar from "@/app/components/BookingSidebar";
 
 export default async function HotelDetailPage({ params }) {
     const { id } = await params;
@@ -15,7 +16,7 @@ export default async function HotelDetailPage({ params }) {
     const hotel = await HotelModel.findById(id);
 
     if (!hotel) {
-        return <div style={{ padding: 40, textAlign: "center" }}>Property not found</div>;
+        return <div className={styles.notFound}>Property not found</div>;
     }
 
     // Fetch Host Info
@@ -80,11 +81,11 @@ export default async function HotelDetailPage({ params }) {
             {/* Image Gallery */}
             <div className={styles.gallery}>
                 <div className={styles.mainImage}>
-                    <Image src={mainImage} alt="Main View" fill style={{ objectFit: "cover" }} />
+                    <Image src={mainImage} alt="Main View" fill className={styles.coverImage} />
                 </div>
                 {otherImages.map((img, idx) => (
                     <div key={idx} className={styles.sideImage}>
-                        <Image src={img} alt={`Gallery ${idx}`} fill style={{ objectFit: "cover" }} />
+                        <Image src={img} alt={`Gallery ${idx}`} fill className={styles.coverImage} />
                     </div>
                 ))}
                 <button className={styles.showPhotosBtn}>
@@ -148,8 +149,8 @@ export default async function HotelDetailPage({ params }) {
                             {/* Reuse MapComponent but focused on one hotel */}
                             <MapWrapper hotels={[serializedHotel]} />
                         </div>
-                        <p style={{ marginTop: 16 }}>{hotel.location}</p>
-                        <p style={{ color: '#6a6a6a', fontSize: 14 }}>{hotel.shortDescription}</p>
+                        <p className={styles.locationText}>{hotel.location}</p>
+                        <p className={styles.descriptionText}>{hotel.shortDescription}</p>
                     </div>
 
                     {/* Meet Your Host Section */}
@@ -159,15 +160,15 @@ export default async function HotelDetailPage({ params }) {
                             {/* Left Card */}
                             <div className={styles.hostCard}>
                                 <div className={styles.hostCardFlex}>
-                                    <div style={{ flex: 1 }}>
+                                    <div className={styles.flex1}>
                                         <div className={styles.hostAvatarLarge}>
                                             {/* DiceBear Avatar */}
-                                            <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                                            <div className={styles.relativeFull}>
                                                 <Image
                                                     src={`https://api.dicebear.com/9.x/avataaars/svg?seed=${host ? host.username : "Host"}&backgroundColor=b6e3f4,c0aede,d1d4f9&clothing=${host?.gender === 'female' ? 'collarAndSweater' : 'shirtCrewNeck'}&top=${host?.gender === 'female' ? 'longButNotTooLong,straight01,straight02' : 'shortFlat,shortRound,theCaesar'}&accessoriesProbability=0`}
                                                     alt="Host"
                                                     fill
-                                                    style={{ objectFit: 'cover' }}
+                                                    className={styles.coverImage}
                                                 />
                                             </div>
                                             <div className={styles.badge}>✔</div>
@@ -175,18 +176,18 @@ export default async function HotelDetailPage({ params }) {
                                         <div className={styles.hostCardName}>{host ? host.username : "Host"}</div>
                                         <div className={styles.hostLabel}>Host</div>
                                     </div>
-                                    <div style={{ textAlign: 'left' }}>
+                                    <div className={styles.textAlignLeft}>
                                         <div className={styles.statValue}>9</div>
                                         <div className={styles.statLabelSmall}>Reviews</div>
-                                        <div style={{ height: 1, background: '#ddd', margin: '8px 0' }}></div>
+                                        <div className={styles.divider}></div>
                                         <div className={styles.statValue}>5.0★</div>
                                         <div className={styles.statLabelSmall}>Rating</div>
-                                        <div style={{ height: 1, background: '#ddd', margin: '8px 0' }}></div>
+                                        <div className={styles.divider}></div>
                                         <div className={styles.statValue}>1</div>
                                         <div className={styles.statLabelSmall}>Year hosting</div>
                                     </div>
                                 </div>
-                                <div className={styles.hostDetailsRight} style={{ paddingTop: 0 }}>
+                                <div className={`${styles.hostDetailsRight} ${styles.paddingTop0}`}>
                                     {/* Additional details inside card if needed */}
                                 </div>
                             </div>
@@ -200,7 +201,7 @@ export default async function HotelDetailPage({ params }) {
                                 </div>
                                 <button className={styles.messageBtn}>Message host</button>
                                 <div className={styles.safetyDisclaimer}>
-                                    <ShieldCheck size={24} style={{ minWidth: 24, marginTop: 4 }} />
+                                    <ShieldCheck size={24} className={styles.shieldIcon} />
                                     <span>To help protect your payment, always use Vihara to send money and communicate with hosts.</span>
                                 </div>
                             </div>
@@ -214,57 +215,7 @@ export default async function HotelDetailPage({ params }) {
 
                 {/* Right Column: Sticky Sidebar */}
                 <div className={styles.sidebar}>
-                    <div className={styles.bookingCard}>
-                        <div className={styles.cardHeader}>
-                            <div className={styles.price}>
-                                ₹{hotel.price} <span className={styles.night}>night</span>
-                            </div>
-                            <div className={styles.cardRating}>
-                                <Star size={14} fill="black" /> 5.0 · <span style={{ color: '#6a6a6a', textDecoration: 'underline' }}>7 reviews</span>
-                            </div>
-                        </div>
-
-                        <div className={styles.picker}>
-                            <div className={styles.dateRow}>
-                                <div className={styles.dateInput}>
-                                    <span className={styles.label}>CHECK-IN</span>
-                                    <div className={styles.val}>{new Date().toLocaleDateString()}</div>
-                                </div>
-                                <div className={styles.dateInput}>
-                                    <span className={styles.label}>CHECKOUT</span>
-                                    <div className={styles.val}>{new Date(Date.now() + 86400000 * 5).toLocaleDateString()}</div>
-                                </div>
-                            </div>
-                            <div className={styles.guestInput}>
-                                <div style={{ borderTop: '1px solid #b0b0b0', marginTop: -10, paddingTop: 10 }}>
-                                    <span className={styles.label}>GUESTS</span>
-                                    <div className={styles.val}>{facilities.guests || 2} guests</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button className={styles.reserveBtn}>Reserve</button>
-
-                        <div className={styles.chargeText}>You won't be charged yet</div>
-
-                        <div className={styles.costRow}>
-                            <span style={{ textDecoration: 'underline' }}>₹{hotel.price} x 5 nights</span>
-                            <span>₹{hotel.price * 5}</span>
-                        </div>
-                        <div className={styles.costRow}>
-                            <span style={{ textDecoration: 'underline' }}>Cleaning fee</span>
-                            <span>₹1,500</span>
-                        </div>
-                        <div className={styles.costRow}>
-                            <span style={{ textDecoration: 'underline' }}>Vihara service fee</span>
-                            <span>₹2,400</span>
-                        </div>
-
-                        <div className={styles.totalRow}>
-                            <span>Total before taxes</span>
-                            <span>₹{hotel.price * 5 + 3900}</span>
-                        </div>
-                    </div>
+                    <BookingSidebar hotel={serializedHotel} />
                 </div>
 
             </div>

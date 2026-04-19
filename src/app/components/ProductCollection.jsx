@@ -56,14 +56,7 @@ const ProductCollection = () => {
           );
         })
       ) : (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "50vh",
-          }}
-        >
+        <div className="loaderContainer">
           <Loader />
         </div>
       )}

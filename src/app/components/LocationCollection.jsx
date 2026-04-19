@@ -164,7 +164,7 @@ export default function LocationCollection() {
                         alt={item.location}
                         fill
                         quality={90}
-                        style={{ objectFit: "cover", objectPosition: "center" }}
+                        className={styles.coverFullImg}
                         onError={(e) => {
                           e.currentTarget.srcset = "";
                           e.currentTarget.src = "/bg-resort-2.jpeg";

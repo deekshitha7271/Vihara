@@ -311,3 +311,27 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Utilities Additions */
+.mapLoading {
+    height: 100%;
+    background: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.noHotelsContainer {
+    text-align: center;
+    padding: 60px;
+    color: #666;
+}
+
+.filterSelectContainer {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.w100 {
+    width: 100%;
+}

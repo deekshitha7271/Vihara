@@ -37,6 +37,11 @@ const bookingSchema = new mongoose.Schema({
         type: String,
         enum: ['PENDING', 'PAID', 'FAILED'],
         default: 'PENDING'
+    },
+    stripeSessionId: {
+        type: String,
+        unique: true,
+        sparse: true
     }
 }, { timestamps: true });
 

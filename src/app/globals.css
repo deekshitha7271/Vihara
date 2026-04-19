@@ -165,6 +165,57 @@
   gap: 10px
 }
 
+.adminProfileContainer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Map Utilities */
+.mapPickerContainer {
+  height: 300px;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  z-index: 0;
+}
+
+.mapComponentContainer {
+  height: 100%;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.mapPopupContainer {
+  width: 200px;
+  padding: 0;
+}
+
+.mapPopupImg {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.mapPopupDetails {
+  padding: 0 4px 4px;
+}
+
+.mapPopupTitle {
+  font-size: 1rem;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.mapPopupPrice {
+  color: #036b5a;
+  font-weight: bold;
+}
+
 .right button {
   padding: 15px 45px;
   width: 100%;
@@ -262,6 +313,43 @@
   justify-content: center;
   align-items: center;
   padding-top: 10px;
+}
+
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+}
+
+/* Calendar Utilities */
+.calendarErrorText {
+  color: red;
+}
+
+/* General Layout Utilities */
+.appLoaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #ffffff;
+  z-index: 99999;
+  overflow: hidden;
+}
+
+.mapLoadingFallback {
+  height: 480px;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .dateRange {

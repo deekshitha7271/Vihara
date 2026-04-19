@@ -3,33 +3,26 @@
 import { updateBookingStatusAction } from "@/app/serverActions/bookingActions";
 import { Check, X } from "lucide-react";
 import styles from "./bookings.module.css";
-import Swal from "sweetalert2";
+// Removed SweetAlert
 
 export default function BookingActions({ bookingId }) {
 
     const handleAction = async (status) => {
         try {
-            const result = await Swal.fire({
-                title: `Are you sure?`,
-                text: `Do you want to ${status.toLowerCase()} this booking?`,
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: status === 'CONFIRMED' ? '#28a745' : '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: `Yes, ${status.toLowerCase()} it!`
-            });
+            const isConfirmed = window.confirm(`Are you sure you want to ${status.toLowerCase()} this booking?`);
 
-            if (result.isConfirmed) {
+            if (isConfirmed) {
                 const actionResult = await updateBookingStatusAction(bookingId, status);
                 if (actionResult.success) {
-                    Swal.fire('Success', actionResult.message, 'success');
+                    alert(`${status} successfully!`);
+                    window.location.reload();
                 } else {
-                    Swal.fire('Error', actionResult.message, 'error');
+                    alert(`Error: ${actionResult.message}`);
                 }
             }
         } catch (error) {
             console.error(error);
-            Swal.fire('Error', 'Action failed', 'error');
+            alert('Action failed');
         }
     };
 

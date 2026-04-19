@@ -1,0 +1,70 @@
+.editorButton {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    cursor: pointer;
+    color: #555;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.editorContainer {
+    margin-top: 10px;
+    padding: 16px;
+    background: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 12px;
+}
+
+.editorTitle {
+    margin: 0 0 10px 0;
+    font-size: 0.9rem;
+}
+
+.inputRow {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.inputField {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 100px;
+}
+
+.actionRow {
+    display: flex;
+    gap: 8px;
+}
+
+.saveBtn {
+    padding: 6px 12px;
+    background: #036b5a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.cancelBtn {
+    padding: 6px 12px;
+    background: transparent;
+    color: #666;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.tipText {
+    font-size: 0.75rem;
+    color: #999;
+    margin-top: 8px;
+}
